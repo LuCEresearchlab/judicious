@@ -1,0 +1,19 @@
+code, pre {
+    font-family: 'Fira Code', monospace;
+}
+
+.monaco-editor .iPadShowKeyboard {
+    display: none;
+} 
+
+.peekview-title > .filename {
+    display: none;
+}
+
+.peekview-widget .message > div {
+    font-weight: bold;
+}
+
+.peekview-actions li:has(.codicon-marker-navigation-next, .codicon-marker-navigation-previous) {
+    display: none;
+}

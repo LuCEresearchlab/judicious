@@ -1,0 +1,155 @@
+{
+    "module": "random",
+    "elements": [
+        {
+            "kind": "function",
+            "name": "randint",
+            "description": {
+                "p": [
+                    "Returns a random integer between the two specified values, inclusive."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "a",
+                    "type": "int",
+                    "description": "The lower bound of the range"
+                },
+                {
+                    "name": "b",
+                    "type": "int",
+                    "description": "The upper bound of the range"
+                }
+            ],
+            "returnValue": {
+                "type": "int",
+                "description": "A random integer between a and b, inclusive"
+            },
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "random",
+            "description": {
+                "p": [
+                    "Returns a random floating point number between 0 (included) and 1 (excluded)."
+                ]
+            },
+            "parameters": [],
+            "returnValue": {
+                "type": "float",
+                "description": "A random floating point number between 0 and 1"
+            },
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "choice",
+            "description": {
+                "p": [
+                    "Returns a random element from the given sequence."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "sequence",
+                    "type": "Sequence[T]",
+                    "description": "A sequence of elements"
+                }
+            ],
+            "returnValue": {
+                "type": "T",
+                "description": "A random element from the sequence"
+            },
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "choices",
+            "description": {
+                "p": [
+                    "Returns a list with a random sample of elements from the given sequence.",
+                    "Elements are sampled with equal probability, unless specific weights are provided."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "sequence",
+                    "type": "Sequence[T]",
+                    "description": "A sequence of elements"
+                },
+                {
+                    "name": "weights",
+                    "type": "Sequence[float]",
+                    "description": "A sequence of weights, one for each element in the sequence, to determine the probability of sampling each element",
+                    "default": "None"
+                },
+                {
+                    "name": "cum_weights",
+                    "type": "Sequence[float]",
+                    "description": "A sequence of cumulative weights (to be used as an alternative to weights)",
+                    "default": "None"
+                },
+                {
+                    "name": "k",
+                    "type": "int",
+                    "description": "The number of elements to sample",
+                    "default": "1"
+                }
+            ],
+            "returnValue": {
+                "type": "List[T]",
+                "description": "A list with `k` random elements from the sequence"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "shuffle",
+            "description": {
+                "p": [
+                    "Shuffles the elements of the given sequence, mutating the parameter."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "sequence",
+                    "type": "Sequence[T]",
+                    "description": "A sequence of elements which itself will be shuffled"
+                }
+            ],
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "sample",
+            "description": {
+                "p": [
+                    "Returns a list with `k` unique elements sampled from the given sequence.",
+                    "This is known as 'sampling without replacement'."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "sequence",
+                    "type": "Sequence[T]",
+                    "description": "A sequence of elements"
+                },
+                {
+                    "name": "k",
+                    "type": "int",
+                    "description": "The number of elements to sample"
+                },
+                {
+                    "name": "counts",
+                    "type": "Sequence[int]",
+                    "description": "A sequence of counts, one for each element in the sequence, to determine the number of times each element can be sampled",
+                    "default": "None"
+                }
+            ],
+            "returnValue": {
+                "type": "List[T]",
+                "description": "A list with `k` random elements from the sequence"
+            }
+        }
+    ]
+} 

@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use Judicious, please cite the following."
+title: Judicious
+authors:
+  - family-names: Chiodini
+    given-names: Luca
+    orcid: https://orcid.org/0000-0002-2712-9248
+url: "https://github.com/LuCEresearchlab/judicious"
+preferred-citation:
+  type: 'conference-paper'
+  authors:
+    - family-names: Chiodini
+      given-names: Luca
+      orcid: https://orcid.org/0000-0002-2712-9248
+    - family-names: Piatti
+      given-names: Simone
+      orcid: https://orcid.org/0009-0006-2236-7745
+    - family-names: Hauswirth
+      given-names: Matthias
+      orcid: https://orcid.org/0000-0001-5527-5931
+  title: "Judicious: API Documentation for Novices"
+  year: 2024
+  collection-title: "Proceedings of the 2024 ACM SIGPLAN International Symposium on SPLASH-E"
+  conference:
+    name: SPLASH-E 2024
+  doi: 10.1145/3689493.3689987

@@ -1,0 +1,37 @@
+{
+    "module": "functools",
+    "elements": [
+        {
+            "kind": "function",
+            "name": "reduce",
+            "description": {
+                "p": [
+                    "Repetedly call a function with the elements of a sequence from left to right, accumulating the result.",
+                    "Optionally, an initial value can be used to start the accumulation."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "function",
+                    "type": "A, T -> A",
+                    "description": "A function that combines the accumulated value with an element of the sequence"
+                },
+                {
+                    "name": "sequence",
+                    "type": "Sequence[T]",
+                    "description": "A sequence of elements"
+                },
+                {
+                    "name": "initial_value",
+                    "type": "T",
+                    "description": "A initial value for the accumulation",
+                    "default": "None"
+                }
+            ],
+            "returnValue": {
+                "type": "A",
+                "description": "The accumulated value"
+            }
+        }
+    ]
+}

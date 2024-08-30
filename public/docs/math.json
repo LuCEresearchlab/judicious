@@ -1,0 +1,189 @@
+{
+    "module": "math",
+    "elements": [
+        {
+            "kind": "function",
+            "name": "sin",
+            "description": {
+                "p": ["Returns the sine of the given angle."]
+            },
+            "parameters": [
+                {
+                    "name": "angle",
+                    "type": "float",
+                    "description": "angle in radians"
+                }
+            ],
+            "returnValue": {
+                "type": "float",
+                "description": "sine of the angle"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "cos",
+            "description": {
+                "p": ["Returns the cosine of the given angle."]
+            },
+            "parameters": [
+                {
+                    "name": "angle",
+                    "type": "float",
+                    "description": "angle in radians"
+                }
+            ],
+            "returnValue": {
+                "type": "float",
+                "description": "cosine of the angle"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "tan",
+            "description": {
+                "p": ["Returns the tangent of the given angle."]
+            },
+            "parameters": [
+                {
+                    "name": "angle",
+                    "type": "float",
+                    "description": "angle in radians"
+                }
+            ],
+            "returnValue": {
+                "type": "float",
+                "description": "tangent of the angle"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "asin",
+            "description": {
+                "p": ["Returns the arcsine of the given value."]
+            },
+            "parameters": [
+                {
+                    "name": "value",
+                    "type": "float",
+                    "description": "value between -1 and 1"
+                }
+            ],
+            "returnValue": {
+                "type": "float",
+                "description": "angle in radians"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "acos",
+            "description": {
+                "p": ["Returns the arccosine of the given value."]
+            },
+            "parameters": [
+                {
+                    "name": "value",
+                    "type": "float",
+                    "description": "value between -1 and 1"
+                }
+            ],
+            "returnValue": {
+                "type": "float",
+                "description": "angle in radians"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "radians",
+            "description": {
+                "p": ["Converts the given angle from degrees to radians."]
+            },
+            "parameters": [
+                {
+                    "name": "angle",
+                    "type": "float",
+                    "description": "angle in degrees"
+                }
+            ],
+            "returnValue": {
+                "type": "float",
+                "description": "angle in radians"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "log",
+            "description": {
+                "p": ["Returns the logarithm of the given value.", "Unless a different base is provided, computes the natural logarithm."]
+            },
+            "parameters": [
+                {
+                    "name": "x",
+                    "type": "float",
+                    "description": "value to compute the logarithm of"
+                },
+                {
+                    "name": "base",
+                    "type": "float",
+                    "description": "base of the logarithm",
+                    "default": "e"
+                }
+            ],
+            "returnValue": {
+                "type": "float",
+                "description": "logarithm of the provided value"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "sqrt",
+            "description": {
+                "p": ["Returns the square root of the given number."]
+            },
+            "parameters": [
+                {
+                    "name": "x",
+                    "type": "float",
+                    "description": "number to compute the square root of"
+                }
+            ],
+            "returnValue": {
+                "type": "float",
+                "description": "square root of the provided number"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "exp",
+            "description": {
+                "p": ["Returns the exponential of the given number."]
+            },
+            "parameters": [
+                {
+                    "name": "x",
+                    "type": "float",
+                    "description": "exponent of the formula eˣ"
+                }
+            ],
+            "returnValue": {
+                "type": "float",
+                "description": "exponential of the provided number"
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "pi",
+            "type": "float",
+            "description": {
+                "p": ["The mathematical constant π = 3.141592…"]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "e",
+            "type": "float",
+            "description": {
+                "p": ["The mathematical constant e = 2.718281…"]
+            }
+        }
+    ]
+} 

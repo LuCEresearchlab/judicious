@@ -1,0 +1,17 @@
+{
+  "name": "python-analyzer",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "python_analyzer_bg.wasm",
+    "python_analyzer.js",
+    "python_analyzer_bg.js",
+    "python_analyzer.d.ts"
+  ],
+  "main": "python_analyzer.js",
+  "types": "python_analyzer.d.ts",
+  "sideEffects": [
+    "./python_analyzer.js",
+    "./snippets/*"
+  ]
+}

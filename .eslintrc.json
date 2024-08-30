@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "airbnb-typescript",
+    "next/core-web-vitals",
+    "plugin:cypress/recommended"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "ignorePatterns": ["src/python-analyzer/**"],
+  "rules": {
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": [
+          "draft"
+        ]
+      }
+    ],
+    "react/require-default-props": [2, {
+      "functions": "defaultArguments"
+    }],
+    "import/no-relative-packages": "off"
+  }
+}

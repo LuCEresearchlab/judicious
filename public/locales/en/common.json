@@ -1,0 +1,20 @@
+{
+    "playground": "Playground",
+    "documentation": "Documentation",
+    "runCode": "Run",
+    "runningCode": "Running",
+    "doneRunningCode": "Done",
+    "alreadyExecuted": "Already executed: change the code to run again",
+    "executionCompletedWithErrors": "Execution completed with errors",
+    "executionCompletedSuccessfully": "Execution completed successfully",
+    "resetCell": "Reset",
+    "copyCode": "Copy Code",
+    "hideOutput": "Hide Output",
+    "showOutput": "Show Output",
+    "normalWidth": "Normal Width",
+    "wideWidth": "Full Width",
+    "staleOutput": "Stale output: re-run the code to refresh it",
+    "contents": "Contents",
+    "resetActivityConfirm": "OK, delete my code",
+    "resetActivityCancel": "Cancel"
+}

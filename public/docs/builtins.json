@@ -1,0 +1,548 @@
+{
+    "module": "builtins",
+    "elements": [
+        {
+            "kind": "function",
+            "name": "range",
+            "description": {
+                "p": [
+                    "Returns a sequence of numbers from 0 (inclusive) to stop (exclusive).",
+                    "Optionally, a different starting number (inclusive can be specified).",
+                    "If step is specified, it is used as the increment between numbers."]
+            },
+            "parameters": [
+                {
+                    "name": "start",
+                    "type": "int",
+                    "description": "starting number",
+                    "default": "0"
+                },
+                {
+                    "name": "stop",
+                    "type": "int",
+                    "description": "ending number"
+                },
+                {
+                    "name": "step",
+                    "type": "int",
+                    "description": "increment between numbers",
+                    "default": "1"
+                }
+            ],
+            "returnValue": {
+                "type": "range",
+                "description": "sequence of numbers"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "len",
+            "description": {
+                "p": [
+                    "Returns the length of a sequence (such as a string, tuple, list, or range) or a collection (such as a dictionary)."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "sequence",
+                    "type": "any",
+                    "description": "sequence or collection"
+                }
+            ],
+            "returnValue": {
+                "type": "int",
+                "description": "length of the sequence or collection"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "abs",
+            "description": {
+                "p": [
+                    "Returns the absolute value of a number."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "number",
+                    "type": "int | float",
+                    "description": "integer or floating point number"
+                }
+            ],
+            "returnValue": {
+                "type": "int | float",
+                "description": "absolute value of the number"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "print",
+            "description": {
+                "p": [
+                    "Prints a value as a string to the console.",
+                    "The function also accepts multiple values, which are separated by spaces by default."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "value",
+                    "type": "Any",
+                    "description": "value to print",
+                    "variableLength": true
+                },
+                {
+                    "name": "sep",
+                    "type": "str",
+                    "description": "separator between values",
+                    "default": "' '"
+                },
+                {
+                    "name": "end",
+                    "type": "str",
+                    "description": "string to append after the last value",
+                    "default": "'\\n'"
+                },
+                {
+                    "name": "file",
+                    "type": "file",
+                    "description": "file object to write to",
+                    "default": "stdout"
+                },
+                {
+                    "name": "flush",
+                    "type": "bool",
+                    "description": "whether to force flusing the stream",
+                    "default": "False"
+                }
+            ],
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "input",
+            "description": {
+                "p": [
+                    "Reads a line from the console as a string.",
+                    "If a prompt is specified, it is printed to the console before reading the input."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "prompt",
+                    "type": "str",
+                    "description": "string to print to the console (without a trailing newline)",
+                    "default": "''"
+                }
+            ],
+            "returnValue": {
+                "type": "str",
+                "description": "the line read from the console, without the trailing newline"
+            },
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "int",
+            "description": {
+                "p": [
+                    "Converts a value to an integer.",
+                    "If the value is a string, it is parsed as an integer with an optional base."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "value",
+                    "type": "str | int",
+                    "description": "value to convert to an integer"
+                },
+                {
+                    "name": "base",
+                    "type": "int",
+                    "description": "base of the integer",
+                    "default": "10"
+                }
+            ],
+            "returnValue": {
+                "type": "int",
+                "description": "an integer value in the specified base"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "str",
+            "description": {
+                "p": [
+                    "Converts a value to a string."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "value",
+                    "type": "Any",
+                    "description": "value to convert to a string"
+                }
+            ],
+            "returnValue": {
+                "type": "str",
+                "description": "a string representation of the value"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "chr",
+            "description": {
+                "p": [
+                    "Converts a Unicode code point into a character.",
+                    "Inverse of the function `ord`."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "code_point",
+                    "type": "int",
+                    "description": "Unicode code point"
+                }
+            ],
+            "returnValue": {
+                "type": "str",
+                "description": "character represented by the code point"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "ord",
+            "description": {
+                "p": [
+                    "Converts a character into its Unicode code point.",
+                    "Inverse of the function `chr`."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "character",
+                    "type": "str",
+                    "description": "character"
+                }
+            ],
+            "returnValue": {
+                "type": "int",
+                "description": "Unicode code point of the character"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "enumerate",
+            "description": {
+                "p": [
+                    "Given a sequence, produces a sequence of pairs of indices and elements (as tuples).",
+                    "The first element has index 0, unless a different starting index is specified."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "sequence",
+                    "type": "Sequence[T]",
+                    "description": "sequence to enumerate"
+                },
+                {
+                    "name": "start",
+                    "type": "int",
+                    "description": "starting index",
+                    "default": "0"
+                }
+            ],
+            "returnValue": {
+                "type": "Sequence[Tuple[int, T]]",
+                "description": "sequence of pairs of indices and elements"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "filter",
+            "description": {
+                "p": [
+                    "Given a function and a sequence, constructs a sequence only with the elements for which the function is true."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "predicate",
+                    "type": "T -> bool",
+                    "description": "function (boolean predicate) that given an element returns True iff the element is to be kept"
+                },
+                {
+                    "name": "sequence",
+                    "type": "Sequence[T]",
+                    "description": "sequence to filter"
+                }
+            ],
+            "returnValue": {
+                "type": "Sequence[T]",
+                "description": "sequence of elements for which the predicate is true"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "map",
+            "description": {
+                "p": [
+                    "Given a function and a sequence, constructs a sequence of the results of applying the function to the elements of the sequence."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "function",
+                    "type": "T -> U",
+                    "description": "function to apply to the elements"
+                },
+                {
+                    "name": "sequence",
+                    "type": "Sequence[T]",
+                    "description": "sequence to map"
+                }
+            ],
+            "returnValue": {
+                "type": "Sequence[U]",
+                "description": "sequence of elements transformed by applying the function"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "list",
+            "description": {
+                "p": [
+                    "Converts a sequence to a list."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "sequence",
+                    "type": "Sequence",
+                    "description": "sequence to convert to a list"
+                }
+            ],
+            "returnValue": {
+                "type": "List",
+                "description": "list with the elements of the sequence"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "max",
+            "description": {
+                "p": [
+                    "Returns the maximum value in a sequence or among multiple values."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "first_value",
+                    "type": "Sequence[T] | T",
+                    "description": "sequence of elements or just a single value"
+                },
+                {
+                    "name": "value",
+                    "type": "T",
+                    "description": "additional values to compare",
+                    "variableLength": true
+                },
+                {
+                    "name": "key",
+                    "type": "T -> K",
+                    "description": "optional function to extract the comparison key from the elements",
+                    "default": "None"
+                }
+            ],
+            "returnValue": {
+                "type": "T",
+                "description": "the maximum value"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "min",
+            "description": {
+                "p": [
+                    "Returns the minimum value in a sequence or among multiple values."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "first_value",
+                    "type": "Sequence[T] | T",
+                    "description": "sequence of elements or just a single value"
+                },
+                {
+                    "name": "value",
+                    "type": "T",
+                    "description": "additional values to compare",
+                    "variableLength": true
+                },
+                {
+                    "name": "key",
+                    "type": "T -> K",
+                    "description": "optional function to extract the comparison key from the elements",
+                    "default": "None"
+                }
+            ],
+            "returnValue": {
+                "type": "T",
+                "description": "the minimum value"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "pow",
+            "description": {
+                "p": [
+                    "Returns the result of raising a number to a power.",
+                    "If a modulo is specified, the result is the remainder of the division by the modulo, efficiently computed."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "base",
+                    "type": "int | float",
+                    "description": "base of the exponentiation"
+                },
+                {
+                    "name": "exponent",
+                    "type": "int | float",
+                    "description": "exponent of the exponentiation"
+                },
+                {
+                    "name": "modulo",
+                    "type": "int",
+                    "description": "modulo",
+                    "default": "None"
+                }
+            ],
+            "returnValue": {
+                "type": "int | float",
+                "description": "result of the exponentiation"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "round",
+            "description": {
+                "p": [
+                    "Returns the value of a number rounded to the nearest integer.",
+                    "If a number of digits is specified, the number is rounded to that number of decimal places."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "number",
+                    "type": "float",
+                    "description": "number to round"
+                },
+                {
+                    "name": "digits",
+                    "type": "int",
+                    "description": "number of decimal places",
+                    "default": "0"
+                }
+            ],
+            "returnValue": {
+                "type": "int | float",
+                "description": "rounded value, possibly with decimal places"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "sum",
+            "description": {
+                "p": [
+                    "Returns the sum of the numbers in a sequence."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "sequence",
+                    "type": "Sequence[int | float]",
+                    "description": "sequence of numbers"
+                },
+                {
+                    "name": "start",
+                    "type": "int | float",
+                    "description": "initial value for the sum",
+                    "default": "0"
+                }
+            ],
+            "returnValue": {
+                "type": "int | float",
+                "description": "the sum of the elements"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "zip",
+            "description": {
+                "p": [
+                    "Given multiple sequences, constructs a sequence of tuples with elements picked in order from the sequences.",
+                    "Zipping stops when the shortest sequence is exhausted."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "sequence",
+                    "type": "Sequence[Sequence[Any]]",
+                    "description": "sequences to zip"
+                },
+                {
+                    "name": "strict",
+                    "type": "bool",
+                    "description": "whether to raise an error if the sequences have different lengths",
+                    "default": "False"
+                }
+            ],
+            "returnValue": {
+                "type": "Sequence[Tuple[Any]]",
+                "description": "sequence of tuples with the elements of the sequences"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "all",
+            "description": {
+                "p": [
+                    "Returns True if all elements of a sequence are true.",
+                    "Empty sequences are considered to have all elements true."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "sequence",
+                    "type": "Sequence[bool]",
+                    "description": "sequence of boolean values"
+                }
+            ],
+            "returnValue": {
+                "type": "bool",
+                "description": "True if all elements are true, False otherwise"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "any",
+            "description": {
+                "p": [
+                    "Returns True if any element of a sequence is true.",
+                    "Empty sequences are considered to have no elements true."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "sequence",
+                    "type": "Sequence[bool]",
+                    "description": "sequence of boolean values"
+                }
+            ],
+            "returnValue": {
+                "type": "bool",
+                "description": "True if any element is true, False otherwise"
+            }
+        }
+    ]
+}
