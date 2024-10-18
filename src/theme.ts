@@ -59,7 +59,7 @@ const theme = responsiveFontSizes(createTheme({
     },
   },
   custom: {
-    monospaceFontFamily: "'Fira Code', monospace",
+    monospaceFontFamily: "'Fira Code Variable', monospace",
     redColor: '#D2071D',
   },
   typography: {

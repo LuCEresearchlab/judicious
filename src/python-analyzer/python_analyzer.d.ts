@@ -4,27 +4,7 @@
 * @param {string} python_source
 * @returns {any}
 */
-export function parse(python_source: string): any;
-/**
-* @param {string} python_source
-* @returns {any}
-*/
-export function imported_names(python_source: string): any;
-/**
-* @param {string} python_source
-* @returns {any}
-*/
-export function defined_functions(python_source: string): any;
-/**
-* @param {string} python_source
-* @returns {any}
-*/
-export function called_names(python_source: string): any;
-/**
-* @param {string} python_source
-* @returns {any}
-*/
-export function find_ellipsis(python_source: string): any;
+export function analyze(python_source: string): any;
 
 export interface PythonName {
     module: string;
@@ -41,6 +21,18 @@ export interface PythonFunctionArgument {
     type_str: string;
     default: string | undefined;
     variable_length: boolean;
+};
+export interface ParseError {
+    message: string;
+    location: [number, number];
+};
+export interface AnalysisResult {
+    imported_names: PythonName[];
+    defined_functions: PythonFunction[];
+    called_names: string[];
+    has_ellipsis: boolean;
+    import_ranges: [number, number][];
+    parse_errors: ParseError[];
 };
 
 

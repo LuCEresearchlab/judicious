@@ -1,5 +1,6 @@
 {
     "module": "builtins",
+    "summary": "Common functions available without imports",
     "elements": [
         {
             "kind": "function",
@@ -45,7 +46,7 @@
             "parameters": [
                 {
                     "name": "sequence",
-                    "type": "any",
+                    "type": "Any",
                     "description": "sequence or collection"
                 }
             ],

@@ -13,5 +13,9 @@ console_error_panic_hook = "0.1.7"
 wasm-bindgen = { version = "0.2.87", features = ["serde-serialize"] }
 serde = { version = "1.0", features = ["derive"] }
 serde-wasm-bindgen = "0.4"
-rustpython-parser = "0.3.1"
-rustpython-ast = { version = "0.3.1", features = ["unparse", "visitor"] }
+ruff_python_ast = { git = "https://github.com/astral-sh/ruff", tag = "0.6.3" }
+ruff_python_parser = { git = "https://github.com/astral-sh/ruff", tag = "0.6.3" }
+ruff_text_size = { git = "https://github.com/astral-sh/ruff", tag = "0.6.3" }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.43"

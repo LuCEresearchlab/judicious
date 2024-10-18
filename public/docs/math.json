@@ -1,5 +1,6 @@
 {
     "module": "math",
+    "summary": "Basic mathematical functions and constants",
     "elements": [
         {
             "kind": "function",

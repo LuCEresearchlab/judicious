@@ -52,7 +52,7 @@ export default function CodeCell({
   return (
     <Paper elevation={readOnly ? 0 : 2}>
       {!readOnly
-        && <DocumentationStripe source={currentSource} />}
+        && <DocumentationStripe sources={[currentSource]} />}
       <Card elevation={0}>
         <CardContent>
           <CodeEditor

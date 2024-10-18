@@ -1,5 +1,7 @@
+
 code, pre {
-    font-family: 'Fira Code', monospace;
+    font-family: 'Fira Code Variable', monospace;
+    font-variant-ligatures: none;
 }
 
 .monaco-editor .iPadShowKeyboard {

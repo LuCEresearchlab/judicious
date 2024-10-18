@@ -1,5 +1,5 @@
 import { PythonFunction } from '../../src/python-analyzer/python_analyzer';
-import { JudiciousDocFunction, JudiciousDocParameter } from '../../src/schemas/documentation';
+import { JudiciousFunction, JudiciousParameter } from '../../src/schemas/documentation';
 
 export const HOVER_COLOR = '#c2ecff';
 export const DARK_HOVER_COLOR = '#0eb4ff';
@@ -45,11 +45,11 @@ export function sentence(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
-export function visibleParameters(params: JudiciousDocParameter[], showOptional: boolean) {
+export function visibleParameters(params: JudiciousParameter[], showOptional: boolean) {
   return params.filter((param) => param.default === undefined || showOptional);
 }
 
-export function definedFnToJudiciousDocFunction(fn: PythonFunction): JudiciousDocFunction {
+export function definedFnToJudiciousFunction(fn: PythonFunction): JudiciousFunction {
   return {
     kind: 'function',
     name: fn.name,

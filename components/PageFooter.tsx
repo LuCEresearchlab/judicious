@@ -2,8 +2,18 @@ import { Container, Link, Typography } from '@mui/material';
 
 export default function PageFooter() {
   return (
-    <Container maxWidth="lg" sx={{ mt: 'auto', mb: 2 }}>
-      <Typography variant="body2" align="center">
+    <Container maxWidth="lg" sx={{ mt: 'auto', mb: 3 }}>
+      <Typography variant="body1" align="center" fontSize="1.2rem" mb={2}>
+        Check out
+        {' '}
+        <Link href="https://pytamaro.si.usi.ch/"><strong>PyTamaro</strong></Link>
+        ,
+        {' '}
+        a web-based educational Python environment that uses
+        {' '}
+        <Link href="https://pytamaro.si.usi.ch/documentation">Judicious documentation</Link>
+      </Typography>
+      <Typography variant="body1" align="center" fontSize="1.2rem">
         <strong>Judicious</strong>
         {' '}
         is a project created by

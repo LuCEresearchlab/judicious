@@ -12,7 +12,7 @@ import theme from '../src/theme';
 import '../style/styles.css';
 
 // Fonts
-import '@fontsource/fira-code/400.css';
+import '@fontsource-variable/fira-code';
 import '@fontsource/fira-sans/300.css';
 import '@fontsource/fira-sans/400.css';
 import '@fontsource/fira-sans/500.css';

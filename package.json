@@ -14,7 +14,8 @@
     "@emotion/react": "^11.10.5",
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.5",
-    "@fontsource/fira-code": "^5.0.2",
+    "@floating-ui/react": "^0.26.25",
+    "@fontsource-variable/fira-code": "^5.0.20",
     "@fontsource/fira-sans": "^5.0.2",
     "@formatjs/intl-localematcher": "^0.5.1",
     "@hapi/topo": "^6.0.2",
@@ -37,6 +38,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^13.3.1",
+    "react-resize-detector": "^11.0.1",
     "sharp": "^0.32.6",
     "use-local-storage-state": "^18.3.3",
     "use-session-storage-state": "^18.2.0",
@@ -69,7 +71,7 @@
     "prettier": "^2.7.1",
     "simple-git": "^3.14.1",
     "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.6.3"
   },
   "browserslist": [
     "defaults and supports es6-module"

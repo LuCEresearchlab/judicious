@@ -1,7 +1,15 @@
+use ruff_python_ast::statement_visitor::StatementVisitor;
+use ruff_python_ast::visitor;
+use ruff_python_ast::Expr;
+use ruff_python_ast::ParameterWithDefault;
+use ruff_python_ast::Parameters;
 use wasm_bindgen::prelude::*;
 extern crate console_error_panic_hook;
-use rustpython_parser::{Mode, parse as parser_parse};
-use rustpython_parser::ast::{Visitor, Stmt, StmtImportFrom, StmtFunctionDef, Expr, ExprCall, ExprConstant, Arguments, ArgWithDefault};
+use ruff_python_ast::Stmt;
+use ruff_python_ast::visitor::Visitor;
+use ruff_python_parser::{Mode, parse_unchecked};
+use ruff_text_size::Ranged;
+
 use serde::{Deserialize, Serialize};
 pub fn start() {
     console_error_panic_hook::set_once();
@@ -25,182 +33,204 @@ export interface PythonFunctionArgument {
     default: string | undefined;
     variable_length: boolean;
 };
+export interface ParseError {
+    message: string;
+    location: [number, number];
+};
+export interface AnalysisResult {
+    imported_names: PythonName[];
+    defined_functions: PythonFunction[];
+    called_names: string[];
+    has_ellipsis: boolean;
+    import_ranges: [number, number][];
+    parse_errors: ParseError[];
+};
 "#;
 
-#[derive(Serialize, Deserialize)]
-struct PythonName {
-    module: String,
-    name: String,
+#[derive(Serialize, Deserialize, Debug, PartialEq)]
+pub struct PythonName {
+    pub module: String,
+    pub name: String,
 }
 
 struct ImportedNamesCollector {
     names: Vec<PythonName>,
 }
-impl Visitor for ImportedNamesCollector {
-    fn visit_stmt_import_from(&mut self, node: StmtImportFrom) {
-        if let Some(module) = node.module {
-            for alias in &node.names {
-                self.names.push(PythonName { module: module.to_string(), name: alias.name.to_string() });
+impl StatementVisitor<'_> for ImportedNamesCollector {
+    fn visit_stmt(&mut self, node: &Stmt) {
+        if let Stmt::ImportFrom(importnode) = node {
+            if let Some(module) = &importnode.module {
+                for alias in &importnode.names {
+                    self.names.push(PythonName { module: module.to_string(), name: alias.name.to_string() });
+                }
             }
         }
     }
 }
 
-#[derive(Serialize, Deserialize)]
-struct PythonFunction {
-    name: String,
-    args: Vec<PythonFunctionArgument>,
-    return_type_str: String,
-    docstring: String,
+#[derive(Serialize, Deserialize, Debug, PartialEq)]
+pub struct ImportRangesVisitor {
+    pub ranges: Vec<(u32, u32)>,
 }
 
-#[derive(Serialize, Deserialize)]
-struct PythonFunctionArgument {
-    name: String,
-    type_str: String,
-    default: Option<String>,
-    variable_length: bool,
+impl StatementVisitor<'_> for ImportRangesVisitor {
+    fn visit_stmt(&mut self, node: &Stmt) {
+        if let Stmt::ImportFrom(importnode) = node {
+            self.ranges.push((importnode.range().start().to_u32(), importnode.range().end().to_u32()));
+        }
+    }
 }
 
-fn get_type_str(optional_expr: &Option<Box<Expr>>) -> String {
-    optional_expr.as_ref().map_or_else(|| String::new(), |expr| expr.to_string())
+#[derive(Serialize, Deserialize, Debug, PartialEq)]
+pub struct PythonFunction {
+    pub name: String,
+    pub args: Vec<PythonFunctionArgument>,
+    pub return_type_str: String,
+    pub docstring: String,
 }
 
-fn argument_with_default(arg: &ArgWithDefault) -> PythonFunctionArgument {
+#[derive(Serialize, Deserialize, Debug, PartialEq)]
+pub struct PythonFunctionArgument {
+    pub name: String,
+    pub type_str: String,
+    pub default: Option<String>,
+    pub variable_length: bool,
+}
+
+fn get_type_str(optional_expr: &Option<Box<Expr>>, source: &str) -> String {
+    optional_expr.as_ref().map_or_else(String::new, |expr| source[expr.range()].to_string())
+}
+
+fn parameter_with_default(param: &ParameterWithDefault, source: &str) -> PythonFunctionArgument {
     PythonFunctionArgument {
-        name: arg.def.arg.to_string(),
-        type_str: get_type_str(&arg.def.annotation),
-        default: arg.default.as_ref().map(|expr| expr.to_string()),
+        name: param.parameter.name.to_string(),
+        type_str: get_type_str(&param.parameter.annotation, source),
+        default: param.default.as_ref().map(|expr| source[expr.range()].to_string()),
         variable_length: false,
     }
 }
 
-fn arguments(ast_args: &Arguments) -> Vec<PythonFunctionArgument> {
-    let args = ast_args.args.iter().map(argument_with_default);
-    let vararg = ast_args.vararg.as_ref().map(|arg| PythonFunctionArgument {
-        name: arg.arg.to_string(),
-        type_str: get_type_str(&arg.annotation),
+fn parameters(ast_params: &Parameters, source: &str) -> Vec<PythonFunctionArgument> {
+    let args = ast_params.args.iter().map(|arg| parameter_with_default(arg, source));
+    let vararg = ast_params.vararg.as_ref().map(|arg| PythonFunctionArgument {
+        name: arg.name.to_string(),
+        type_str: get_type_str(&arg.annotation, source),
         default: None,
         variable_length: true,
     });
-    let kwonlyargs = ast_args.kwonlyargs.iter().map(argument_with_default);
-    return args.chain(vararg).chain(kwonlyargs).collect(); 
+    let kwonlyargs = ast_params.kwonlyargs.iter().map(|arg| parameter_with_default(arg, source));
+    args.chain(vararg).chain(kwonlyargs).collect()
 }
 
 struct FunctionDefinitionsCollector {
     functions: Vec<PythonFunction>,
+    source: String,
 }
-impl Visitor for FunctionDefinitionsCollector {
-    fn visit_stmt_function_def(&mut self, node: StmtFunctionDef) {
-        self.functions.push(PythonFunction {
-            name: node.name.to_string(),
-            args: arguments(&node.args),
-            return_type_str: get_type_str(&node.returns),
-            docstring: node.body.first().and_then(|stmt| {
-                if let Stmt::Expr(expr) = stmt {
-                    if let Expr::Constant(constant) = expr.value.as_ref() {
-                        return constant.value.as_str().map(|s| s.to_string());
+impl StatementVisitor<'_> for FunctionDefinitionsCollector {
+    fn visit_stmt(&mut self, node: &Stmt) {
+        if let Stmt::FunctionDef(fndefnode) = node {
+            self.functions.push(PythonFunction {
+                name: fndefnode.name.to_string(),
+                args: parameters(&fndefnode.parameters, &self.source),
+                return_type_str: get_type_str(&fndefnode.returns, &self.source),
+                docstring: fndefnode.body.first().and_then(|stmt| {
+                    if let Stmt::Expr(expr) = stmt {
+                        if let Expr::StringLiteral(strliteralnode) = expr.value.as_ref() {
+                            return Some(strliteralnode.value.to_str().to_string());
+                        }
                     }
-                }
-                return None;
-            }).unwrap_or(String::new()),
-        });
+                    None
+                }).unwrap_or(String::new()),
+            });
+        }
     }
 }
 
 struct CalledNamesCollector {
     names: Vec<String>,
 }
-impl Visitor for CalledNamesCollector {
-    fn visit_expr_call(&mut self, node: ExprCall) {
-        if let Expr::Name(name) = &*node.func {
-            self.names.push(name.id.to_string());
+impl Visitor<'_> for CalledNamesCollector {
+    fn visit_expr(&mut self, node: &Expr) {
+        if let Expr::Call(callnode) = node {
+            if let Expr::Name(name) = &*callnode.func {
+                self.names.push(name.id.to_string());
+            }
+            visitor::walk_expr(self, node);
         }
-        self.generic_visit_expr_call(node);
     }
 }
 
 struct EllipsisFinder {
     found: bool,
 }
-impl Visitor for EllipsisFinder {
-    fn visit_expr_constant(&mut self, node: ExprConstant) {
-        if node.value.is_ellipsis() {
+impl Visitor<'_> for EllipsisFinder {
+    fn visit_expr(&mut self, node: &Expr) {
+        if node.is_ellipsis_literal_expr() {
             self.found = true;
         }
+        visitor::walk_expr(self, node);
     }
 }
 
-pub fn parse_to_stmts(python_source: &str) -> Result<Vec<Stmt>, String> {
-    match parser_parse(python_source, Mode::Module, "cell") {
-        Ok(m) => {
-            return Ok(m.expect_module().body)
-        },
-        Err(e) => {
-            return Err(format!("{}", e));
-        }
-    }
+#[derive(Serialize, Deserialize, Debug, PartialEq)]
+pub struct ParseError {
+    pub message: String,
+    pub location: (u32, u32),
 }
 
-fn parse_and_process_stmts<F, T>(python_source: &str, process: F) -> Result<JsValue, JsValue>
-where F: Fn(Vec<Stmt>) -> T, T: Serialize {
-    match parse_to_stmts(python_source) {
-        Ok(stmts) => {
-            return Ok(serde_wasm_bindgen::to_value(&process(stmts))?);
-        },
-        Err(e) => {
-            return Err(JsValue::from_str(e.as_str()));
-        }
-    }
+#[derive(Serialize, Deserialize, Debug, PartialEq)]
+pub struct AnalysisResult {
+    pub imported_names: Vec<PythonName>,
+    pub defined_functions: Vec<PythonFunction>,
+    pub called_names: Vec<String>,
+    pub has_ellipsis: bool,
+    pub import_ranges: Vec<(u32, u32)>,
+    pub parse_errors: Vec<ParseError>,
 }
 
 #[wasm_bindgen]
-pub fn parse(python_source: &str) -> Result<JsValue, JsValue> {
-    parse_and_process_stmts(python_source, |_| true)
-}
- 
-#[wasm_bindgen]
-pub fn imported_names(python_source: &str) -> Result<JsValue, JsValue> {
-    parse_and_process_stmts(python_source, |stmts| {
+pub fn analyze(python_source: &str) -> JsValue {
+    let parsed = parse_unchecked(python_source, Mode::Module);
+    let parse_errors = parsed.errors().iter().map(|e| ParseError {
+        message: e.error.to_string(),
+        location: (e.location.start().to_u32(), e.location.end().to_u32()),
+    }).collect();
+    let stmts = parsed.into_syntax().expect_module().body;
+    let imported_names = {
         let mut collector = ImportedNamesCollector { names: Vec::new() };
-        for stmt in stmts {
-            collector.visit_stmt(stmt);
-        }
+        collector.visit_body(&stmts);
         collector.names
-    })
-}
-
-#[wasm_bindgen]
-pub fn defined_functions(python_source: &str) -> Result<JsValue, JsValue> {
-    parse_and_process_stmts(python_source, |stmts| {
-        let mut collector = FunctionDefinitionsCollector { functions: Vec::new() };
-        for stmt in stmts {
-            collector.visit_stmt(stmt);
-        }
+    };
+    let defined_functions = {
+        let mut collector = FunctionDefinitionsCollector { functions: Vec::new(), source: python_source.to_string() };
+        collector.visit_body(&stmts); 
         collector.functions
-    })
-}
-
-#[wasm_bindgen]
-pub fn called_names(python_source: &str) -> Result<JsValue, JsValue> {
-    parse_and_process_stmts(python_source, |stmts| {
+    };
+    let called_names = {
         let mut collector = CalledNamesCollector { names: Vec::new() };
-        for stmt in stmts {
-            collector.visit_stmt(stmt);
-        }
+        collector.visit_body(&stmts);
         collector.names
-    })
-}
-
-#[wasm_bindgen]
-pub fn find_ellipsis(python_source: &str) -> Result<JsValue, JsValue> {
-    parse_and_process_stmts(python_source, |stmts| {
+    };
+    let has_ellipsis = {
         let mut finder = EllipsisFinder {
             found: false,
         };
-        for stmt in stmts {
-            finder.visit_stmt(stmt);
-        }
+        finder.visit_body(&stmts);
         finder.found
-    })
+    };
+    let import_ranges = {
+        let mut visitor = ImportRangesVisitor { ranges: Vec::new() };
+        visitor.visit_body(&stmts);
+        visitor.ranges
+    };
+    let result = AnalysisResult {
+        imported_names,
+        defined_functions,
+        called_names,
+        has_ellipsis,
+        import_ranges,
+        parse_errors,
+    };
+    serde_wasm_bindgen::to_value(&result).unwrap()
 }
+ 

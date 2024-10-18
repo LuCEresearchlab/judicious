@@ -1,13 +1,16 @@
-export type JudiciousDocModule = {
+export type JudiciousModule = {
   module: string;
-  elements: (JudiciousDocFunction | JudiciousDocType | JudiciousDocConstant)[];
+  summary: string;
+  elements: JudiciousElement[];
 };
 
-export type JudiciousDocFunction = {
+export type JudiciousElement = JudiciousFunction | JudiciousType | JudiciousConstant;
+
+export type JudiciousFunction = {
   kind: 'function';
   name: string;
-  description: JudiciousDocDescription;
-  parameters: JudiciousDocParameter[];
+  description: JudiciousDescription;
+  parameters: JudiciousParameter[];
   returnValue?: {
     type: string;
     description: string;
@@ -15,7 +18,7 @@ export type JudiciousDocFunction = {
   sideEffects?: boolean;
 };
 
-export type JudiciousDocDescription = {
+export type JudiciousDescription = {
   p: string[];
   figure?: {
     url: string;
@@ -23,7 +26,7 @@ export type JudiciousDocDescription = {
   };
 };
 
-export type JudiciousDocParameter = {
+export type JudiciousParameter = {
   name: string;
   type: string;
   description: string;
@@ -31,16 +34,16 @@ export type JudiciousDocParameter = {
   variableLength?: boolean;
 };
 
-export type JudiciousDocType = {
+export type JudiciousType = {
   kind: 'type';
-} & JudiciousDocSimpleElement;
+} & JudiciousSimpleElement;
 
-export type JudiciousDocConstant = {
+export type JudiciousConstant = {
   kind: 'constant';
   type: string;
-} & JudiciousDocSimpleElement;
+} & JudiciousSimpleElement;
 
-export type JudiciousDocSimpleElement = {
+export type JudiciousSimpleElement = {
   name: string;
-  description: JudiciousDocDescription;
+  description: JudiciousDescription;
 };

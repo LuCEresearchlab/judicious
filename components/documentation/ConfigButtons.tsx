@@ -1,6 +1,6 @@
 import { Category, Schema, Tune } from '@mui/icons-material';
 import { ToggleButton, ToggleButtonGroup, Tooltip } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useLocalProfile from '../../src/localStorage/useLocalProfile';
 
 export const SHOW_DIAGRAM_KEY = 'diagram';
@@ -16,17 +16,20 @@ function tooltipMessage(key: string, active: boolean) {
 
 export default function ConfigButtons({ available } : { available: string[] }) {
   const { docsMetadata, setDocsMetadata } = useLocalProfile();
-  const currentOptions = [];
-  if (docsMetadata.showDiagram && available.includes(SHOW_DIAGRAM_KEY)) {
-    currentOptions.push(SHOW_DIAGRAM_KEY);
-  }
-  if (docsMetadata.showOptional && available.includes(SHOW_OPTIONAL_KEY)) {
-    currentOptions.push(SHOW_OPTIONAL_KEY);
-  }
-  if (docsMetadata.showTypes && available.includes(SHOW_TYPES_KEY)) {
-    currentOptions.push(SHOW_TYPES_KEY);
-  }
-  const [optionsKeys, setOptionsKeys] = useState<string[]>(currentOptions);
+  const [optionsKeys, setOptionsKeys] = useState<string[]>([]);
+  useEffect(() => {
+    const newOptions = [];
+    if (docsMetadata.showDiagram && available.includes(SHOW_DIAGRAM_KEY)) {
+      newOptions.push(SHOW_DIAGRAM_KEY);
+    }
+    if (docsMetadata.showOptional && available.includes(SHOW_OPTIONAL_KEY)) {
+      newOptions.push(SHOW_OPTIONAL_KEY);
+    }
+    if (docsMetadata.showTypes && available.includes(SHOW_TYPES_KEY)) {
+      newOptions.push(SHOW_TYPES_KEY);
+    }
+    setOptionsKeys(newOptions);
+  }, [docsMetadata, available]);
   const handleOptionsKeys = (ev: React.MouseEvent<HTMLElement>, value: string[]) => {
     setOptionsKeys(value);
     setDocsMetadata({
@@ -39,7 +42,7 @@ export default function ConfigButtons({ available } : { available: string[] }) {
     });
   };
   return (
-    <ToggleButtonGroup sx={{ ml: 'auto' }} size="small" value={optionsKeys} onChange={handleOptionsKeys}>
+    <ToggleButtonGroup sx={{ ml: 'auto', mt: -1, pb: 1 }} size="small" value={optionsKeys} onChange={handleOptionsKeys}>
       {available.map((key) => (
         <Tooltip key={key} title={tooltipMessage(key, optionsKeys.includes(key))} arrow>
           <ToggleButton value={key}>

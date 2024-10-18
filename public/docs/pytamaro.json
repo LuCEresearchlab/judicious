@@ -1,0 +1,832 @@
+{
+    "module": "pytamaro",
+    "summary": "PyTamaro graphics library (English API)",
+    "elements": [
+        {
+            "kind": "function",
+            "name": "hsl_color",
+            "description": {
+                "p": [
+                    "Returns a color with the provided hue (H), saturation (S), lightness (L) and a certain degree of opacity (alpha, A)."
+                ],
+                "figure": {
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/HSL_color_solid_cylinder.png",
+                    "caption": "HSL cylinder: SharkD via Wikimedia Commons"
+                }
+            },
+            "parameters": [
+                {
+                    "name": "hue",
+                    "type": "float",
+                    "description": "hue of the color [0-360]"
+                },
+                {
+                    "name": "saturation",
+                    "type": "float",
+                    "description": "saturation of the color [0-1]"
+                },
+                {
+                    "name": "lightness",
+                    "type": "float",
+                    "description": "the amount of white or black applied [0-1]. Fully saturated colors have a lightness value of 1/2."
+                },
+                {
+                    "name": "opacity",
+                    "type": "float",
+                    "default": "1.0",
+                    "description": "opacity (alpha) of the color, where 0 means fully transparent and 1 fully opaque. By default, all colors are fully opaque."
+                }
+            ],
+            "returnValue": {
+                "type": "Color",
+                "description": "a color with the provided HSLA components"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "hsv_color",
+            "description": {
+                "p": [
+                    "Returns a color with the provided hue (H), saturation (S), value (V) and a certain degree of opacity (alpha, A)."
+                ],
+                "figure": {
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4e/HSV_color_solid_cylinder.png",
+                    "caption": "HSV cylinder (SharkD via Wikimedia Commons)"
+                }
+            },
+            "parameters": [
+                {
+                    "name": "hue",
+                    "type": "float",
+                    "description": "hue of the color [0-360]"
+                },
+                {
+                    "name": "saturation",
+                    "type": "float",
+                    "description": "saturation of the color [0-1]"
+                },
+                {
+                    "name": "value",
+                    "type": "float",
+                    "description": "the amount of light that is applied [0-1]"
+                },
+                {
+                    "name": "opacity",
+                    "type": "float",
+                    "default": "1.0",
+                    "description": "opacity (alpha) of the color, where 0 means fully transparent and 1 fully opaque. By default, all colors are fully opaque."
+                }
+            ],
+            "returnValue": {
+                "type": "Color",
+                "description": "a color with the provided HSVA components."
+            }
+        },
+        {
+            "kind": "function",
+            "name": "rgb_color",
+            "description": {
+                "p": [
+                    "Returns a color with the provided components for red (R), green (G) and blue (B) and a certain degree of opacity (alpha, A)."
+                ],
+                "figure": {
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/RGBCube_a.svg/524px-RGBCube_a.svg.png",
+                    "caption": "RGB cube (SharkD via Wikimedia Commons)"
+                }
+            },
+            "parameters": [
+                {
+                    "name": "red",
+                    "type": "int",
+                    "description": "red component [0-255]"
+                },
+                {
+                    "name": "green",
+                    "type": "int",
+                    "description": "green component [0-255]"
+                },
+                {
+                    "name": "blue",
+                    "type": "int",
+                    "description": "blue component [0-255]"
+                },
+                {
+                    "name": "opacity",
+                    "type": "float",
+                    "default": "1.0",
+                    "description": "opacity (alpha) of the color, where 0 means fully transparent and 1 fully opaque. By default, all colors are fully opaque."
+                }
+            ],
+            "returnValue": {
+                "type": "Color",
+                "description": "a color with the provided RGBA components"
+            }
+        },
+        {
+            "kind": "type",
+            "name": "Color",
+            "type": "ass",
+            "description": {
+                "p": [
+                    "Represents a color. A color also has a degree of opacity, from completely transparent (like the color transparent) to completely opaque (like the color red)."
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "black",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Black color"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "blue",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Blue color"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "cyan",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Cyan color"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "green",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Green color"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "magenta",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Magenta color"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "red",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Red color"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "transparent",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Fully-transparent color"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "white",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "White color"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "yellow",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Yellow color"
+                ]
+            }
+        },
+        {
+            "kind": "type",
+            "name": "Graphic",
+            "type": "ass",
+            "description": {
+                "p": [
+                    "A graphic (image) with a position for pinning.",
+                    "The pinning position is used in the following operations:"
+                ]
+            }
+        },
+        {
+            "kind": "function",
+            "name": "save_animation",
+            "description": {
+                "p": [
+                    "Save a sequence of graphics as an animation (GIF).",
+                    "Graphics are sequentially reproduced (normally at 25 frames per second) in a loop (unless specificied otherwise)."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "filename",
+                    "type": "str",
+                    "description": "name of the file to create, including the extension \u2018.gif\u2019"
+                },
+                {
+                    "name": "graphics",
+                    "type": "List[Graphic]",
+                    "description": "list of graphics to be saved as an animation"
+                },
+                {
+                    "name": "duration",
+                    "type": "int",
+                    "default": "40",
+                    "description": "duration in milliseconds for each frame (defaults to 40 milliseconds, which leads to 25 frames per second)"
+                },
+                {
+                    "name": "loop",
+                    "type": "bool",
+                    "default": "True",
+                    "description": "whether the GIF should loop indefinitely (defaults to true)"
+                }
+            ],
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "save_graphic",
+            "description": {
+                "p": [
+                    "Save a graphic to a file. Two file formats are supported: PNG (raster graphics) and SVG (vector graphics). The extension of the filename (either \u201c.png\u201d or \u201c.svg\u201d) determines the format.",
+                    "Graphics with no area cannot be saved in the PNG format.",
+                    "When debug is True, adorns the visualization with useful information for debugging: a red border around the bounding box and a yellowish cross around the pinning position."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "filename",
+                    "type": "str",
+                    "description": "name of the file to create (with the extension)"
+                },
+                {
+                    "name": "graphic",
+                    "type": "Graphic",
+                    "description": "graphic to be saved"
+                },
+                {
+                    "name": "debug",
+                    "type": "bool",
+                    "default": "False",
+                    "description": "can be optionally set to True to overlay debugging information"
+                }
+            ],
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "show_animation",
+            "description": {
+                "p": [
+                    "Show a sequence of graphics as an animation (GIF).",
+                    "Graphics are sequentially reproduced (normally at 25 frames per second) in a loop (unless specificied otherwise)."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "graphics",
+                    "type": "List[Graphic]",
+                    "description": "list of graphics to be shown as an animation"
+                },
+                {
+                    "name": "duration",
+                    "type": "int",
+                    "default": "40",
+                    "description": "duration in milliseconds for each frame (defaults to 40 milliseconds, which leads to 25 frames per second)"
+                },
+                {
+                    "name": "loop",
+                    "type": "bool",
+                    "default": "True",
+                    "description": "whether the animation should loop indefinitely (defaults to true)"
+                }
+            ],
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "show_graphic",
+            "description": {
+                "p": [
+                    "Show a graphic. Graphics with no area cannot be shown.",
+                    "When debug is True, adorns the visualization with useful information for debugging: a red border around the bounding box and a yellowish cross around the pinning position."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "graphic",
+                    "type": "Graphic",
+                    "description": "graphic to be shown"
+                },
+                {
+                    "name": "debug",
+                    "type": "bool",
+                    "default": "False",
+                    "description": "can be optionally set to True to overlay debugging information"
+                }
+            ],
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "circular_sector",
+            "description": {
+                "p": [
+                    "Creates a circular sector belonging to a circle of the given radius, filled with a color.",
+                    "A circular sector is a portion of a circle enclosed between two radii and an arc. Considering a circle as a clock, the first radius is supposed to \u201cpoint\u201d towards 3 o\u2019clock. The angle determines the position of the second radius, computed starting from the first one in counterclockwise direction. An angle of 360 degrees corresponds to a full circle.",
+                    "The pinning position is at the center of the circle from which the circular sector is taken."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "radius",
+                    "type": "float",
+                    "description": "radius of the circle from which the circular sector is taken"
+                },
+                {
+                    "name": "angle",
+                    "type": "float",
+                    "description": "central angle, in degrees"
+                },
+                {
+                    "name": "color",
+                    "type": "Color",
+                    "description": "the color to be used to fill the circular sector"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "the specified circular sector as a graphic"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "ellipse",
+            "description": {
+                "p": [
+                    "Creates an ellipse with the given width and height, filled with a color.",
+                    "When width and height are the same, the ellipse becomes a circle with a diameter equal to the provided size."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "width",
+                    "type": "float",
+                    "description": "width of the ellipse"
+                },
+                {
+                    "name": "height",
+                    "type": "float",
+                    "description": "height of the ellipse"
+                },
+                {
+                    "name": "color",
+                    "type": "Color",
+                    "description": "the color to be used to fill the circle"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "the specified circle as a graphic"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "empty_graphic",
+            "description": {
+                "p": [
+                    "Creates an empty graphic. When an empty graphic is composed with any other graphic, it behaves as a neutral element: the result is always identical to the other graphic."
+                ]
+            },
+            "parameters": [],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "an empty graphic (width and height 0)"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "rectangle",
+            "description": {
+                "p": [
+                    "Creates a rectangle of the given size, filled with a color."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "width",
+                    "type": "float",
+                    "description": "width of the rectangle"
+                },
+                {
+                    "name": "height",
+                    "type": "float",
+                    "description": "height of the rectangle"
+                },
+                {
+                    "name": "color",
+                    "type": "Color",
+                    "description": "the color to be used to fill the rectangle"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "the specified rectangle as a graphic"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "text",
+            "description": {
+                "p": [
+                    "Creates a graphic with the text rendered using the specified font, size and color.",
+                    "When the indicated True-Type Font is not found in the system, a very basilar font that is always available is used instead. The resulting graphic has the minimal size that still fits the whole text.",
+                    "The pinning position is horizontally aligned on the left and vertically on the baseline of the text."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "content",
+                    "type": "str",
+                    "description": "the text to render"
+                },
+                {
+                    "name": "font",
+                    "type": "str",
+                    "description": "the name of the font (e.g., \u201cArial\u201d or \u201cFira Sans\u201d)"
+                },
+                {
+                    "name": "points",
+                    "type": "float",
+                    "description": "size in typographic points (e.g., 16)"
+                },
+                {
+                    "name": "color",
+                    "type": "Color",
+                    "description": "the color to be used to render the text"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "the specified text as a graphic"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "triangle",
+            "description": {
+                "p": [
+                    "Creates a triangle specifying two sides and the angle between them, filled with a color. The first side extends horizontally to the right. The angle specifies how much the second side is rotated, counterclockwise, from the first one.",
+                    "For all triangles, except obtuse ones, the bottom-left corner of the resulting graphic concides with the vertex of the triangle for which the angle is specified.",
+                    "The pinning position is the centroid of the triangle."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "side1",
+                    "type": "float",
+                    "description": "length of the first, horizontal side of the triangle"
+                },
+                {
+                    "name": "side2",
+                    "type": "float",
+                    "description": "length of the second side of the triangle"
+                },
+                {
+                    "name": "angle",
+                    "type": "float",
+                    "description": "angle between the two sides, in degrees"
+                },
+                {
+                    "name": "color",
+                    "type": "Color",
+                    "description": "the color to be used to fill the triangle"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "the specified triangle as a graphic"
+            }
+        },
+        {
+            "kind": "type",
+            "name": "Point",
+            "type": "ass",
+            "description": {
+                "p": [
+                    "Represents a point on a plane."
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "bottom_center",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "The middle point of the bottom edge of the bounding box"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "bottom_left",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "The bottom left corner of the bounding box"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "bottom_right",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "The bottom right corner of the bounding box"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "center",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "The center point of the bounding box"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "center_left",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "The middle point of the left edge of the bounding box"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "center_right",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "The middle point of the right edge of the bounding box"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "top_center",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "The middle point of the top edge of the bounding box"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "top_left",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "The top left corner of the bounding box"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "top_right",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "The top right corner of the bounding box"
+                ]
+            }
+        },
+        {
+            "kind": "function",
+            "name": "above",
+            "description": {
+                "p": [
+                    "Creates a new graphic by placing the two graphics one above the other. The two graphics are horizontally centered.",
+                    "The pinning position of the new graphic is at its center."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "top_graphic",
+                    "type": "Graphic",
+                    "description": "graphic to place on the top"
+                },
+                {
+                    "name": "bottom_graphic",
+                    "type": "Graphic",
+                    "description": "graphic to place on the bottom"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "the resulting graphic after placing the two graphics one above the other"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "beside",
+            "description": {
+                "p": [
+                    "Creates a new graphic by placing the two graphics one besides the other. The two graphics are vertically centered.",
+                    "The pinning position of the new graphic is at its center."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "left_graphic",
+                    "type": "Graphic",
+                    "description": "graphic to place on the left"
+                },
+                {
+                    "name": "right_graphic",
+                    "type": "Graphic",
+                    "description": "graphic to place on the right"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "the resulting graphic after placing the two graphics one besides the other"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "compose",
+            "description": {
+                "p": [
+                    "Creates a new graphic by composing the two provided graphics. The first graphic is kept in the foreground, the second one in the background. The graphics are aligned by superimposing their pinning positions.",
+                    "The pinning position used to compose becomes the pinning position of the resulting graphic."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "foreground_graphic",
+                    "type": "Graphic",
+                    "description": "graphic in the foreground"
+                },
+                {
+                    "name": "background_graphic",
+                    "type": "Graphic",
+                    "description": "graphic in the background"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "the resulting composed graphic"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "graphic_height",
+            "description": {
+                "p": [
+                    "Returns the height of a graphic."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "graphic",
+                    "type": "Graphic",
+                    "description": "graphic to calculate the height of"
+                }
+            ],
+            "returnValue": {
+                "type": "int",
+                "description": "height of the graphic"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "graphic_width",
+            "description": {
+                "p": [
+                    "Returns the width of a graphic."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "graphic",
+                    "type": "Graphic",
+                    "description": "graphic to calculate the width of"
+                }
+            ],
+            "returnValue": {
+                "type": "int",
+                "description": "width of the graphic"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "overlay",
+            "description": {
+                "p": [
+                    "Creates a new graphic by overlaying the two provided graphics, keeping the first one in the foreground and the second one in background. The two graphics are overlaid on their centers.",
+                    "The pinning position of the new graphic is at its center."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "foreground_graphic",
+                    "type": "Graphic",
+                    "description": "graphic in the foreground"
+                },
+                {
+                    "name": "background_graphic",
+                    "type": "Graphic",
+                    "description": "graphic in the background"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "the resulting graphic after overlaying the two provided ones"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "pin",
+            "description": {
+                "p": [
+                    "Creates a new graphic that corresponds to the provided graphic, with a new pinning position.",
+                    "Each graphic is contained in a rectangular bounding box. There are 9 notable points, corresponding to the four corners of this rectangle, the middle points of the four edges and the center of the rectangle. These points can be referred to using these names: top_left, top_right, bottom_left, bottom_right, top_center, center_right, bottom_center, center_left and center."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "point",
+                    "type": "Point",
+                    "description": "the point indicating the new pinning position"
+                },
+                {
+                    "name": "graphic",
+                    "type": "Graphic",
+                    "description": "original graphic"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "a new graphic with the specified pinning position"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "rotate",
+            "description": {
+                "p": [
+                    "Creates a new graphic by rotating counterclockwise the provided graphic around its pinning position by the given angle. A negative angle corresponds to a clockwise rotation."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "angle",
+                    "type": "float",
+                    "description": "angle of counterclockwise rotation, in degrees"
+                },
+                {
+                    "name": "graphic",
+                    "type": "Graphic",
+                    "description": "the graphic to rotate"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "a new, rotated graphic"
+            }
+        }
+    ]
+}

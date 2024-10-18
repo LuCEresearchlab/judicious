@@ -4,11 +4,12 @@ import {
   Box,
   Typography,
 } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import useLocalProfile from '../../src/localStorage/useLocalProfile';
 import {
-  JudiciousDocConstant,
-  JudiciousDocType,
+  JudiciousConstant,
+  JudiciousType,
 } from '../../src/schemas/documentation';
 import CodeElement from './CodeElement';
 import ConfigButtons, { SHOW_TYPES_KEY } from './ConfigButtons';
@@ -16,30 +17,29 @@ import ConstantDiagram from './ConstantDiagram';
 import { hoverProps, moduleId, nameId } from './utils';
 
 export default function TypeConstantDocumentation({ element, module }
-: { element: JudiciousDocConstant | JudiciousDocType, module: string }) {
+: { element: JudiciousConstant | JudiciousType, module: string }) {
   const [hoverElement, setHoverElement] = useState<string>('');
   const {
     name, description,
   } = element;
   const { docsMetadata } = useLocalProfile();
+  const { t } = useTranslation();
   return (
     <>
       <Box mb={1}>
         <Box sx={{ display: 'flex' }}>
           <span>
-            <Typography color="primary" fontWeight="bold" component="span">{element.kind === 'constant' ? 'Constant' : 'Type'}</Typography>
-            <Typography color="text.secondary" component="span" sx={{ whiteSpace: 'pre' }}>
-              {' from '}
-            </Typography>
+            <Typography color="primary" fontWeight="bold" component="span">{t(element.kind === 'constant' ? 'Constant' : 'Type')}</Typography>
+            &nbsp;
             <Typography
               color="text.secondary"
               component="span"
               {...hoverProps(moduleId(), hoverElement, setHoverElement)}
             >
-              {module === '.' ? 'your code' : `library ${module}`}
+              {module === '.' ? t('fromYourCode') : t('fromLibrary', { module })}
             </Typography>
           </span>
-          <ConfigButtons available={[SHOW_TYPES_KEY]} />
+          <ConfigButtons available={element.kind === 'constant' ? [SHOW_TYPES_KEY] : []} />
         </Box>
         <Typography>
           <span {...hoverProps(nameId(), hoverElement, setHoverElement)}>

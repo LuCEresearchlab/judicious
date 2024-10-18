@@ -1,0 +1,832 @@
+{
+    "module": "pytamaro.fr",
+    "summary": "PyTamaro graphics library (French API)",
+    "elements": [
+        {
+            "kind": "function",
+            "name": "couleur_hsl",
+            "description": {
+                "p": [
+                    "Retourne une couleur avec la teinte (H), saturation (S) et luminosit\u00e9 (V) donn\u00e9es, ainsi que le taux d\u2019opacit\u00e9 (alpha, A)."
+                ],
+                "figure": {
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/HSL_color_solid_cylinder.png",
+                    "caption": "Cylindre HSL: SharkD via Wikimedia Commons"
+                }
+            },
+            "parameters": [
+                {
+                    "name": "teinte",
+                    "type": "float",
+                    "description": "teinte de la couleur [0-360]"
+                },
+                {
+                    "name": "saturation",
+                    "type": "float",
+                    "description": "saturation de la couleur [0-1]"
+                },
+                {
+                    "name": "luminosite",
+                    "type": "float",
+                    "description": "quantit\u00e9 de blanc ou noire appliqu\u00e9e [0-1]. Les couleurs compl\u00e8tement satur\u00e9es ont un valeur de luminosit\u00e9 de 1/2."
+                },
+                {
+                    "name": "opacite",
+                    "type": "float",
+                    "default": "1.0",
+                    "description": "opacit\u00e9 (alpha) de la couleur, o\u00f9 0 est compl\u00e8tement transparent et 1 compl\u00e8tement opaque. Par d\u00e9faut, toutes les couleurs sont compl\u00e8tement opaques."
+                }
+            ],
+            "returnValue": {
+                "type": "Color",
+                "description": "une couleur avec les composantes HSLA donn\u00e9es."
+            }
+        },
+        {
+            "kind": "function",
+            "name": "couleur_hsv",
+            "description": {
+                "p": [
+                    "Retourne une couleur avec la teinte (H), saturation (S) et valeur (V) donn\u00e9es, ainsi que le taux d\u2019opacit\u00e9 (alpha, A)."
+                ],
+                "figure": {
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4e/HSV_color_solid_cylinder.png",
+                    "caption": "Cylindre HSV (SharkD via Wikimedia Commons)"
+                }
+            },
+            "parameters": [
+                {
+                    "name": "teinte",
+                    "type": "float",
+                    "description": "teinte de la couleur [0-360]"
+                },
+                {
+                    "name": "saturation",
+                    "type": "float",
+                    "description": "saturation de la couleur [0-1]"
+                },
+                {
+                    "name": "valeur",
+                    "type": "float",
+                    "description": "quantit\u00e9 de lumi\u00e8re appliqu\u00e9e [0-1] Les couleurs compl\u00e8tement satur\u00e9es ont une quantit\u00e9 de lumi\u00e8re de 1."
+                },
+                {
+                    "name": "opacite",
+                    "type": "float",
+                    "default": "1.0",
+                    "description": "opacit\u00e9 (alpha) de la couleur, o\u00f9 0 est compl\u00e8tement transparent et 1 compl\u00e8tement opaque. Par d\u00e9faut, toutes les couleurs sont compl\u00e8tement opaques."
+                }
+            ],
+            "returnValue": {
+                "type": "Color",
+                "description": "une couleur avec le composantes HSVA donn\u00e9es"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "couleur_rgb",
+            "description": {
+                "p": [
+                    "Retourne une couleur avec les composantes indiquant le rouge (R), vert (G) et bleu (B) et un certain taux d\u2019opacit\u00e9 (alpha, A)."
+                ],
+                "figure": {
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/RGBCube_a.svg/524px-RGBCube_a.svg.png",
+                    "caption": "Cube RGB (SharkD via Wikimedia Commons)"
+                }
+            },
+            "parameters": [
+                {
+                    "name": "rouge",
+                    "type": "int",
+                    "description": "composante rouge [0-255]"
+                },
+                {
+                    "name": "vert",
+                    "type": "int",
+                    "description": "composante verte [0-255]"
+                },
+                {
+                    "name": "bleu",
+                    "type": "int",
+                    "description": "composante bleue [0-255]"
+                },
+                {
+                    "name": "opacite",
+                    "type": "float",
+                    "default": "1.0",
+                    "description": "opacit\u00e9 (alpha) de la couleur, o\u00f9 0 est compl\u00e8tement transparent et 1 compl\u00e8tement opaque. Par d\u00e9faut, toutes les couleurs sont compl\u00e8tement opaques."
+                }
+            ],
+            "returnValue": {
+                "type": "Color",
+                "description": "une couleur avec les composantes RGBA donn\u00e9es"
+            }
+        },
+        {
+            "kind": "type",
+            "name": "Couleur",
+            "type": null,
+            "description": {
+                "p": [
+                    "Repr\u00e9sente une couleur. Une couleur a aussi un taux d\u2019opacit\u00e9, de compl\u00e8tement transparent (comme la couleur transparent) \u00e0 compl\u00e8tement opaque (comme la couleur rouge)."
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "blanc",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Couleur blanche"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "bleu",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Couleur bleue"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "cyan",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Couleur cyan"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "jaune",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Couleur jaune"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "magenta",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Couleur magenta"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "noir",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Couleur noire"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "rouge",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Couleur rouge"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "transparent",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Couleur compl\u00e8tement transparente"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "vert",
+            "type": "Color",
+            "description": {
+                "p": [
+                    "Couleur verte"
+                ]
+            }
+        },
+        {
+            "kind": "type",
+            "name": "Graphique",
+            "type": null,
+            "description": {
+                "p": [
+                    "Un graphique (image) avec un point d\u2019ancrage.",
+                    "Le point d\u2019ancrage est utilis\u00e9 pour les op\u00e9rations suivantes:"
+                ]
+            }
+        },
+        {
+            "kind": "function",
+            "name": "montre_animation",
+            "description": {
+                "p": [
+                    "Montre une s\u00e9quence de graphiques en tant qu\u2019animation (GIF).",
+                    "Les graphiques sont reproduits de mani\u00e8re s\u00e9quentielle (normalement \u00e0 25 images par secondes) en boucle (\u00e0 moins que \u00e7a ne soit indiqu\u00e9 autrement)."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "graphiques",
+                    "type": "list[Graphic]",
+                    "description": "la liste des graphiques \u00e0 sauvegarder en tant qu\u2019animation."
+                },
+                {
+                    "name": "duree",
+                    "type": "int",
+                    "default": "40",
+                    "description": "dur\u00e9e en millisecondes entre chaque image (par d\u00e9faut est \u00e9gale \u00e0 40 millisecondes, ce qui am\u00e8ne \u00e0 avoir 25 images par secondes)"
+                },
+                {
+                    "name": "en_boucle",
+                    "type": "bool",
+                    "default": "True",
+                    "description": "si le GIF doit tourner en boucle ind\u00e9finiment (par d\u00e9faut est True)"
+                }
+            ],
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "montre_graphique",
+            "description": {
+                "p": [
+                    "Montre un graphique. Les graphiques n\u2019ayant pas de surface ne peuvent pas \u00eatre montr\u00e9s.",
+                    "Quand debug est True, la visualisation est orn\u00e9e d\u2019informations utiles pour le d\u00e9bogage: une bordure rouge autour du cadre de d\u00e9limitation et une croix jaun\u00e2tre autour du point d\u2019ancrage."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "graphique",
+                    "type": "Graphic",
+                    "description": "le graphique \u00e0 montrer"
+                },
+                {
+                    "name": "debug",
+                    "type": "bool",
+                    "default": "False",
+                    "description": "(optionnel) peut \u00eatre assign\u00e9 \u00e0 True pour superposer les informations de d\u00e9bogage"
+                }
+            ],
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "sauvegarde_animation",
+            "description": {
+                "p": [
+                    "Sauvegarde une s\u00e9quence de graphiques en tant qu\u2019animation (GIF).",
+                    "Les graphiques sont reproduits de mani\u00e8re s\u00e9quentielle (normalement \u00e0 25 images par secondes) en boucle (\u00e0 moins que \u00e7a ne soit indiqu\u00e9 autrement)."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "nom_fichier",
+                    "type": "str",
+                    "description": "le nom du fichier \u00e0 cr\u00e9er (contenant l\u2019extension \u201c.gif\u201d)"
+                },
+                {
+                    "name": "graphiques",
+                    "type": "list[Graphic]",
+                    "description": "la liste des graphiques \u00e0 sauvegarder en tant qu\u2019animation."
+                },
+                {
+                    "name": "duree",
+                    "type": "int",
+                    "default": "40",
+                    "description": "dur\u00e9e en millisecondes entre chaque image (par d\u00e9faut est \u00e9gale \u00e0 40 millisecondes, ce qui am\u00e8ne \u00e0 avoir 25 images par secondes)"
+                },
+                {
+                    "name": "en_boucle",
+                    "type": "bool",
+                    "default": "True",
+                    "description": "si le GIF doit tourner en boucle ind\u00e9finiment (par d\u00e9faut est True)"
+                }
+            ],
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "sauvegarde_graphique",
+            "description": {
+                "p": [
+                    "Sauvegarde un graphique dans un fichier. Deux formats de fichiers sont support\u00e9s: PNG (graphiques tram\u00e9s) et SVG (graphiques vectoriels). L\u2019extension du fichier (\u201c.png\u201d ou \u201c.svg\u201d) d\u00e9termine le format.",
+                    "Les graphiques sans surface ne peuvent pas \u00eatre sauvegard\u00e9s au format PNG.",
+                    "Quand debug est True, la visualisation est orn\u00e9e d\u2019informations utiles pour le d\u00e9bogage: une bordure rouge autour du cadre de d\u00e9limitation et une croix jaun\u00e2tre autour du point d\u2019ancrage."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "nom_fichier",
+                    "type": "str",
+                    "description": "le nom du fichier \u00e0 cr\u00e9er (avec l\u2019extension)"
+                },
+                {
+                    "name": "graphique",
+                    "type": "Graphic",
+                    "description": "le graphique \u00e0 sauvegarder"
+                },
+                {
+                    "name": "debug",
+                    "type": "bool",
+                    "default": "False",
+                    "description": "(optionnel) peut \u00eatre assign\u00e9 \u00e0 True pour superposer les informations de d\u00e9bogage"
+                }
+            ],
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "ellipse",
+            "description": {
+                "p": [
+                    "Cr\u00e9\u00e9 une ellipse avec les dimensions indiqu\u00e9es et rempli avec la couleur donn\u00e9e.",
+                    "Lorsque la largeur et la hauteur co\u00efncident, l\u2019ellipse devient un cercle dont le diam\u00e8tre est \u00e9gal \u00e0 la taille indiqu\u00e9e."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "largeur",
+                    "type": "float",
+                    "description": "largeur de l\u2019ellipse"
+                },
+                {
+                    "name": "hauteur",
+                    "type": "float",
+                    "description": "hauteur de l\u2019ellipse"
+                },
+                {
+                    "name": "couleur",
+                    "type": "Color",
+                    "description": "couleur \u00e0 utiliser pour remplir l\u2019ellipse"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "un graphique avec l\u2019ellipse sp\u00e9cifi\u00e9e"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "graphique_vide",
+            "description": {
+                "p": [
+                    "Cr\u00e9\u00e9 un graphique vide. Quand un graphique vide est compos\u00e9 avec n\u2019importe quel autre graphique, il se comporte comme l\u2019\u00e9l\u00e9ment neutre: le r\u00e9sultat est toujours \u00e9gal \u00e0 l\u2019autre graphique."
+                ]
+            },
+            "parameters": [],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "un graphique vide (largeur et hauteur 0)"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "rectangle",
+            "description": {
+                "p": [
+                    "Cr\u00e9\u00e9 un rectangle de dimensions indiqu\u00e9es et rempli avec la couleur donn\u00e9e."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "largeur",
+                    "type": "float",
+                    "description": "largeur du rectangle"
+                },
+                {
+                    "name": "hauteur",
+                    "type": "float",
+                    "description": "hauteur du rectangle"
+                },
+                {
+                    "name": "couleur",
+                    "type": "Color",
+                    "description": "couleur qui remplira le rectangle"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "un graphique avec le rectangle sp\u00e9cifi\u00e9"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "secteur_circulaire",
+            "description": {
+                "p": [
+                    "Cr\u00e9e un secteur circulaire appartenant \u00e0 un cercle du rayon indiqu\u00e9, rempli d\u2019une couleur.",
+                    "Un secteur circulaire est une portion de cercle comprise entre deux rayons et un arc. Si l\u2019on consid\u00e8re le cercle comme une horloge, le premier rayon \u201cpointe\u201d dans la direction de 3 heures. L\u2019angle d\u00e9termine la position du deuxi\u00e8me rayon, calcul\u00e9e \u00e0 partir de la position du premier rayon dans le sens inverse des aiguilles d\u2019une montre. Un angle de 360 degr\u00e9s correspond \u00e0 un cercle complet.",
+                    "Le point d\u2019ancrage se trouve au centre du cercle \u00e0 partir duquel le secteur circulaire est pris."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "rayon",
+                    "type": "float",
+                    "description": "rayon du cercle duquel est pris le secteur circulaire"
+                },
+                {
+                    "name": "angle",
+                    "type": "float",
+                    "description": "angle au centre, en degr\u00e9s"
+                },
+                {
+                    "name": "couleur",
+                    "type": "Color",
+                    "description": "couleur \u00e0 utiliser pour remplir le secteur circulaire"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "un graphique avec le secteur circulaire sp\u00e9cifi\u00e9"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "texte",
+            "description": {
+                "p": [
+                    "Cr\u00e9e un graphique avec le texte rendu \u00e0 l\u2019aide de la police, de la taille et de la couleur sp\u00e9cifi\u00e9es.",
+                    "Lorsque la police True-Type indiqu\u00e9e n\u2019est pas disponible dans le syst\u00e8me, une police tr\u00e8s basique toujours disponible est utilis\u00e9e \u00e0 la place. Le graphique qui en r\u00e9sulte a la taille minimale n\u00e9cessaire pour contenir l\u2019ensemble du texte.",
+                    "La point d\u2019ancrage est align\u00e9e horizontalement sur la gauche et verticalement sur la ligne de base du texte."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "contenu",
+                    "type": "str",
+                    "description": "le texte \u00e0 pr\u00e9senter"
+                },
+                {
+                    "name": "police",
+                    "type": "str",
+                    "description": "le nom de la police (par exemple, \u201cArial\u201d ou \u201cFira Sans\u201d)"
+                },
+                {
+                    "name": "points",
+                    "type": "float",
+                    "description": "la taille en points typographiques (par exemple, 16)"
+                },
+                {
+                    "name": "couleur",
+                    "type": "Color",
+                    "description": "la couleur \u00e0 utiliser pour le rendu du texte"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "le texte sp\u00e9cifi\u00e9 sous forme de graphique"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "triangle",
+            "description": {
+                "p": [
+                    "Cr\u00e9e un triangle en sp\u00e9cifiant deux c\u00f4t\u00e9s et l\u2019angle qui les s\u00e9pare, remplis d\u2019une couleur. Le premier c\u00f4t\u00e9 s\u2019\u00e9tend horizontalement vers la droite. L\u2019angle sp\u00e9cifie la rotation du deuxi\u00e8me c\u00f4t\u00e9, dans le sens inverse des aiguilles d\u2019une montre, par rapport au premier.",
+                    "Pour tous les triangles, \u00e0 l\u2019exception des triangles obtus, le point inf\u00e9rieur gauche du graphique r\u00e9sultant co\u00efncide avec le sommet du triangle dont l\u2019angle a \u00e9t\u00e9 sp\u00e9cifi\u00e9.",
+                    "Le point d\u2019ancrage est le centro\u00efde du triangle."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "cote1",
+                    "type": "float",
+                    "description": "longueur du premier c\u00f4t\u00e9 (horizontal) du triangle"
+                },
+                {
+                    "name": "cote2",
+                    "type": "float",
+                    "description": "longueur du second c\u00f4t\u00e9 du triangle"
+                },
+                {
+                    "name": "angle",
+                    "type": "float",
+                    "description": "angle compris entre les deux c\u00f4t\u00e9, en degr\u00e9s"
+                },
+                {
+                    "name": "couleur",
+                    "type": "Color",
+                    "description": "couleur \u00e0 utiliser pour remplir le secteur circulaire"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "un graphique avec le triangle sp\u00e9cifi\u00e9"
+            }
+        },
+        {
+            "kind": "type",
+            "name": "Point",
+            "type": "ass",
+            "description": {
+                "p": [
+                    "Represents a point on a plane."
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "bas_centre",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Le point central du c\u00f4t\u00e9 inf\u00e9rieur du cadre de d\u00e9limitation du graphique"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "bas_droite",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Le coin en bas \u00e0 droite du cadre de d\u00e9limitation du graphique"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "bas_gauche",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Le coin en bas \u00e0 gauche du cadre de d\u00e9limitation du graphique"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "centre",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Le point central du cadre de d\u00e9limitation du graphique"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "centre_droite",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Le point central du c\u00f4t\u00e9 droit du cadre de d\u00e9limitation du graphique"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "centre_gauche",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Le point central du c\u00f4t\u00e9 gauche du cadre de d\u00e9limitation du graphique"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "haut_centre",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Le point central du c\u00f4t\u00e9 sup\u00e9rieur du cadre de d\u00e9limitation du graphique"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "haut_droite",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Le coin en haut \u00e0 droite du cadre de d\u00e9limitation du graphique"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "haut_gauche",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Le coin en haut \u00e0 gauche du cadre de d\u00e9limitation du graphique"
+                ]
+            }
+        },
+        {
+            "kind": "function",
+            "name": "ancre",
+            "description": {
+                "p": [
+                    "Cr\u00e9\u00e9 un nouveau graphique qui correspond au graphique fourni avec un nouveau point d\u2019ancrage.",
+                    "Chaque graphique est compris dans un cadre de d\u00e9limitation. Il y a 9 points d\u2019ancrages particuliers, qui correspondent aux quatre coins du cadre (rectangle), le milieu de chaque c\u00f4t\u00e9 ainsi que le centre du cadre. Les points peuvent \u00eatre d\u00e9sign\u00e9s avec les noms suivants: haut_gauche, haut_droite, bas_gauche, bas_droite, haut_centre, centre_droite, bas_centre, centre_gauche et centre."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "point",
+                    "type": "Point",
+                    "description": "le point indiquant le nouveau point d\u2019ancrage"
+                },
+                {
+                    "name": "graphique",
+                    "type": "Graphic",
+                    "description": "le graphique originel"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "un nouveau graphique avec le nouveau point d\u2019ancrage"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "au_dessus",
+            "description": {
+                "p": [
+                    "Cr\u00e9\u00e9 un graphique en pla\u00e7ant les deux graphiques fournis l\u2019un au-dessus de l\u2019autre. Les deux graphiques sont centr\u00e9s horizontalement.",
+                    "Le point d\u2019ancrage du nouveau graphique est en son centre."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "graphique_haut",
+                    "type": "Graphic",
+                    "description": "le graphique \u00e0 placer au dessus"
+                },
+                {
+                    "name": "graphique_bas",
+                    "type": "Graphic",
+                    "description": "le graphique \u00e0 placer en dessous"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "le graphique r\u00e9sultant apr\u00e8s avoir plac\u00e9 les deux graphiques l\u2019un au-dessus de l\u2019autre"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "compose",
+            "description": {
+                "p": [
+                    "Cr\u00e9e un nouveau graphique en composant les deux graphiques fournis. Le premier graphique est maintenu au premier plan, le second en arri\u00e8re plan. Les graphiques sont align\u00e9s en superposant les points d\u2019ancrage.",
+                    "Le point d\u2019ancrage du graphique r\u00e9sultant est celui utilis\u00e9 pour la composition."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "graphique_premier_plan",
+                    "type": "Graphic",
+                    "description": "le graphique au premier plan"
+                },
+                {
+                    "name": "graphique_arriere_plan",
+                    "type": "Graphic",
+                    "description": null
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "le graphique qui r\u00e9sulte de la composition"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "cote_a_cote",
+            "description": {
+                "p": [
+                    "Cr\u00e9\u00e9 un graphique en pla\u00e7ant les deux graphiques fournis c\u00f4te \u00e0 c\u00f4te. Les deux graphiques sont centr\u00e9s verticalement.",
+                    "Le point d\u2019ancrage du nouveau graphique est en son centre."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "graphique_gauche",
+                    "type": "Graphic",
+                    "description": "le graphique \u00e0 placer \u00e0 gauche"
+                },
+                {
+                    "name": "graphique_droite",
+                    "type": "Graphic",
+                    "description": "le graphique \u00e0 placer \u00e0 droite"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "le graphique r\u00e9sultant apr\u00e8s avoir plac\u00e9 les deux graphiques l\u2019un \u00e0 c\u00f4t\u00e9 de l\u2019autre"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "hauteur_graphique",
+            "description": {
+                "p": [
+                    "Retourne la hauteur du graphique."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "graphique",
+                    "type": "Graphic",
+                    "description": "graphique duquel calculer la hauteur"
+                }
+            ],
+            "returnValue": {
+                "type": "int",
+                "description": "la hauteur du graphique"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "largeur_graphique",
+            "description": {
+                "p": [
+                    "Retourne la largeur du graphique."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "graphique",
+                    "type": "Graphic",
+                    "description": "graphique duquel calculer la largeur"
+                }
+            ],
+            "returnValue": {
+                "type": "int",
+                "description": "la largeur du graphique"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "pivote",
+            "description": {
+                "p": [
+                    "Cr\u00e9e un nouveau graphique en pivotant dans le sens inverse des aiguilles d\u2019une montre le graphique fourni autour de son point d\u2019ancrage selon l\u2019angle donn\u00e9. Un angle n\u00e9gatif correspond \u00e0 une rotation dans le sens des aiguilles d\u2019une montre."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "angle",
+                    "type": "float",
+                    "description": "angle dans le sens inverse des aiguilles d\u2019une montre, en degr\u00e9s"
+                },
+                {
+                    "name": "graphique",
+                    "type": "Graphic",
+                    "description": "le graphique \u00e0 pivoter"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "un nouveau graphique pivot\u00e9"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "superpose",
+            "description": {
+                "p": [
+                    "Cr\u00e9\u00e9 un nouveau graphique en superposant les deux graphiques fournis, en gardant le premier au premier plan et en mettant le second en arri\u00e8re plan. Les graphiques sont superpos\u00e9s par rapport \u00e0 leur centre.",
+                    "Le point d\u2019ancrage du nouveau graphique est en son centre."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "graphique_premier_plan",
+                    "type": "Graphic",
+                    "description": "le graphique au premier plan"
+                },
+                {
+                    "name": "graphique_arriere_plan",
+                    "type": "Graphic",
+                    "description": "le graphique en arri\u00e8re plan"
+                }
+            ],
+            "returnValue": {
+                "type": "Graphic",
+                "description": "le graphique r\u00e9sultant de la superposition des deux graphiques fournis"
+            }
+        }
+    ]
+}

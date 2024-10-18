@@ -1,0 +1,834 @@
+{
+    "module": "pytamaro.de",
+    "summary": "PyTamaro graphics library (German API)",
+    "elements": [
+        {
+            "kind": "function",
+            "name": "hsl_farbe",
+            "description": {
+                "p": [
+                    "Erzeugt eine Farbe mit dem gegebenen Farbton (H), der S\u00e4ttigung (S), dem Helligkeit (L) und der Opazit\u00e4t (Undurchsichtigkeit, alpha, A)."
+                ],
+                "figure": {
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/HSL_color_solid_cylinder.png",
+                    "caption": "HSL Zylinder: SharkD via Wikimedia Commons"
+                }
+            },
+            "parameters": [
+                {
+                    "name": "farbton",
+                    "type": "float",
+                    "description": "der Farbton (hue) [0-360] als Farbwinkel, in Grad, auf dem Farbkreis (0 f\u00fcr Rot, 120 f\u00fcr Gr\u00fcn, 240 f\u00fcr Blau)"
+                },
+                {
+                    "name": "saettigung",
+                    "type": "float",
+                    "description": "Farbs\u00e4ttigung (saturation) [0-1] (0 = Grau, 0.5 = wenig ges\u00e4ttigte Farbe, 1 = ges\u00e4ttigte, reine Farbe)"
+                },
+                {
+                    "name": "helligkeit",
+                    "type": "float",
+                    "description": "der Anteil Schwarz oder Weiss [0-1]. (0 = Schwarz, 0.5 = weder abgedunkelt noch aufgehellt, 1 = Weiss)"
+                },
+                {
+                    "name": "opazitaet",
+                    "type": "float",
+                    "default": "1.0",
+                    "description": "die Undurchsichtigkeit (alpha), wobei 0 komplett durchsichtig und 1 komplett undurchsichtig entspricht. Standardm\u00e4\u00dfig sind alle Farben vollst\u00e4ndig undurchsichtig."
+                }
+            ],
+            "returnValue": {
+                "type": "Farbe",
+                "description": "eine Farbe mit den gegebenen HSLA-Komponenten"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "hsv_farbe",
+            "description": {
+                "p": [
+                    "Erzeugt eine Farbe mit dem gegebenen Farbton (H), der S\u00e4ttigung (S), dem Hellwert (V) und der Opazit\u00e4t (Undurchsichtigkeit, alpha, A)."
+                ],
+                "figure": {
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4e/HSV_color_solid_cylinder.png",
+                    "caption": "HSV Zylinder (SharkD via Wikimedia Commons)"
+                }
+            },
+            "parameters": [
+                {
+                    "name": "farbton",
+                    "type": "float",
+                    "description": "der Farbton (hue) [0-360] als Farbwinkel, in Grad, auf dem Farbkreis (0 f\u00fcr Rot, 120 f\u00fcr Gr\u00fcn, 240 f\u00fcr Blau)"
+                },
+                {
+                    "name": "saettigung",
+                    "type": "float",
+                    "description": "Farbs\u00e4ttigung (saturation) [0-1] (0 = Grau, 0.5 = wenig ges\u00e4ttigte Farbe, 1 = ges\u00e4ttigte, reine Farbe)"
+                },
+                {
+                    "name": "hellwert",
+                    "type": "float",
+                    "description": "Hellwert (value) der Farbe [0-1] (0 = dunkel, 1 = hell)"
+                },
+                {
+                    "name": "opazitaet",
+                    "type": "float",
+                    "default": "1.0",
+                    "description": "die Undurchsichtigkeit (alpha), wobei 0 komplett durchsichtig und 1 komplett undurchsichtig entspricht. Standardm\u00e4\u00dfig sind alle Farben vollst\u00e4ndig undurchsichtig."
+                }
+            ],
+            "returnValue": {
+                "type": "Farbe",
+                "description": "eine Farbe mit den gegebenen HSVA-Komponenten"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "rgb_farbe",
+            "description": {
+                "p": [
+                    "Erzeugt eine Farbe mit den gegebenen Anteilen Rot (R), Gr\u00fcn (G) und Blau (B) und der gegebenen Opazit\u00e4t (Undurchsichtigkeit, alpha, A)."
+                ],
+                "figure": {
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/RGBCube_a.svg/524px-RGBCube_a.svg.png",
+                    "caption": "RGB W\u00fcrfel (SharkD via Wikimedia Commons)"
+                }
+            },
+            "parameters": [
+                {
+                    "name": "rot",
+                    "type": "int",
+                    "description": "der rote Farbanteil [0-255]"
+                },
+                {
+                    "name": "gruen",
+                    "type": "int",
+                    "description": "der gr\u00fcne Farbanteil [0-255]"
+                },
+                {
+                    "name": "blau",
+                    "type": "int",
+                    "description": "der blaue Farbanteil [0-255]"
+                },
+                {
+                    "name": "opazitaet",
+                    "type": "float",
+                    "default": "1.0",
+                    "description": "die Undurchsichtigkeit (alpha), wobei 0 komplett durchsichtig und 1 komplett undurchsichtig entspricht. Standardm\u00e4\u00dfig sind alle Farben vollst\u00e4ndig undurchsichtig."
+                }
+            ],
+            "returnValue": {
+                "type": "Farbe",
+                "description": "eine Farbe mit den gegebenen RGBA-Komponenten"
+            }
+        },
+        {
+            "kind": "type",
+            "name": "Farbe",
+            "type": null,
+            "description": {
+                "p": [
+                    "Repr\u00e4sentiert eine Farbe. Eine Farbe hat auch eine gewisse Opazit\u00e4t, von komplett durchsichtig (wie die Farbe transparent), bis komplett undurchsichtig (wie die Farbe rot)."
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "blau",
+            "type": "Farbe",
+            "description": {
+                "p": [
+                    "Die Farbe Blau."
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "cyan",
+            "type": "Farbe",
+            "description": {
+                "p": [
+                    "Die Farbe Cyan."
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "gelb",
+            "type": "Farbe",
+            "description": {
+                "p": [
+                    "Die Farbe Gelb."
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "gruen",
+            "type": "Farbe",
+            "description": {
+                "p": [
+                    "Die Farbe Gr\u00fcn."
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "magenta",
+            "type": "Farbe",
+            "description": {
+                "p": [
+                    "Die Farbe Magenta."
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "rot",
+            "type": "Farbe",
+            "description": {
+                "p": [
+                    "Die Farbe Rot."
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "schwarz",
+            "type": "Farbe",
+            "description": {
+                "p": [
+                    "Die Farbe Schwarz."
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "transparent",
+            "type": "Farbe",
+            "description": {
+                "p": [
+                    "Die komplett durchsichtige Farbe."
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "weiss",
+            "type": "Farbe",
+            "description": {
+                "p": [
+                    "Die Farbe Weiss."
+                ]
+            }
+        },
+        {
+            "kind": "type",
+            "name": "Grafik",
+            "type": null,
+            "description": {
+                "p": [
+                    "Eine Grafik mit einer Fixierposition.",
+                    "Die Fixierposition wird von den folgenden Operationen verwendet:"
+                ]
+            }
+        },
+        {
+            "kind": "function",
+            "name": "speichere_animation",
+            "description": {
+                "p": [
+                    "Speichere eine Sequenz von Grafiken als Animation (GIF).",
+                    "Beim Anzeigen des GIFs werden die Grafiken in einer unendlichen Schleife animiert (normalerweise mit 25 Grafiken pro Sekunde)."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "datei_name",
+                    "type": "str",
+                    "description": "Name der zu kreierenden Datei (mit Erweiterung \u2018.gif\u2019)"
+                },
+                {
+                    "name": "grafiken",
+                    "type": "list[Grafik]",
+                    "description": "Liste der zu speichernden Grafiken"
+                },
+                {
+                    "name": "dauer",
+                    "type": "int",
+                    "default": "40",
+                    "description": "Dauer jeder Grafik, in Millisekunden (Default: 40 Millisekunden, enspricht 25 Grafiken pro Sekunde)"
+                },
+                {
+                    "name": "loop",
+                    "type": "bool",
+                    "default": "True",
+                    "description": "bestimmt ob das GIF in einer unendlichen Schleife abgespielt werden soll (Default: true)"
+                }
+            ],
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "speichere_grafik",
+            "description": {
+                "p": [
+                    "Speichere die gegebene Grafik in einer Datei.",
+                    "Zwei Dateiformate werden unterst\u00fctzt: PNG (Rastergrafik) und SVG (Vektorgrafik). Die Dateinamenerweiterung (entweder \u201c.png\u201d oder \u201c.svg\u201d) bestimmt das Dateiformat.",
+                    "Grafiken ohne Fl\u00e4che k\u00f6nnen nicht als PNG-Datei gespeichert werden.",
+                    "Falls debug True ist werden auf der Grafik zus\u00e4tzliche Informationen dargestellt, welche f\u00fcr das Debugging n\u00fctzlich sein k\u00f6nnen. Ein roter Rahmen markiert den Begrenzungsrahmen der Grafik, und ein gelbliches Kreuz gibt die Fixierposition an."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "datei_name",
+                    "type": "str",
+                    "description": "Name der zu kreierenden Datei (mit Erweiterung)"
+                },
+                {
+                    "name": "grafik",
+                    "type": "Grafik",
+                    "description": "zu speichernde Grafik"
+                },
+                {
+                    "name": "debug",
+                    "type": "bool",
+                    "default": "False",
+                    "description": "kann optional auf True gesetzt werden, um \u00fcber der Grafik Debug-Informationen darzustellen"
+                }
+            ],
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "zeige_animation",
+            "description": {
+                "p": [
+                    "Zeige eine Sequenz von Grafiken als Animation (GIF) an.",
+                    "Beim Anzeigen des GIFs werden die Grafiken in einer unendlichen Schleife animiert (normalerweise mit 25 Grafiken pro Sekunde)."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "grafiken",
+                    "type": "list[Grafik]",
+                    "description": "Liste der anzuzeigenden Grafiken"
+                },
+                {
+                    "name": "dauer",
+                    "type": "int",
+                    "default": "40",
+                    "description": "Dauer jeder Grafik, in Millisekunden (Default: 40 Millisekunden, enspricht 25 Grafiken pro Sekunde)"
+                },
+                {
+                    "name": "loop",
+                    "type": "bool",
+                    "default": "True",
+                    "description": "bestimmt ob das GIF in einer unendlichen Schleife abgespielt werden soll (Default: true)"
+                }
+            ],
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "zeige_grafik",
+            "description": {
+                "p": [
+                    "Zeige die gegebene Grafik an.",
+                    "Eine Grafik ohne Fl\u00e4che kann nicht angezeigt werden.",
+                    "Falls debug True ist werden auf der Grafik zus\u00e4tzliche Informationen dargestellt, welche f\u00fcr das Debugging n\u00fctzlich sein k\u00f6nnen. Ein roter Rahmen markiert den Begrenzungsrahmen der Grafik, und ein gelbliches Kreuz gibt die Fixierposition an."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "grafik",
+                    "type": "Grafik",
+                    "description": "die anzuzeigende Grafik"
+                },
+                {
+                    "name": "debug",
+                    "type": "bool",
+                    "default": "False",
+                    "description": "kann optional auf True gesetzt werden, um \u00fcber der Grafik Debug-Informationen darzustellen"
+                }
+            ],
+            "sideEffects": true
+        },
+        {
+            "kind": "function",
+            "name": "dreieck",
+            "description": {
+                "p": [
+                    "Erzeugt ein Dreieck mit den gegebenen Seitenl\u00e4ngen und dem gegebenen Winkel, gef\u00fcllt in der gegebenen Farbe. Die erste Seite verl\u00e4uft horizontal nach rechts. Der Winkel gibt an, wie viel die zweite Seite im Gegenuhrzeigersinn von der ersten Seite abweicht.",
+                    "F\u00fcr alle Dreiecke, ausser f\u00fcr stumpfe Dreiecke, liegt die untere linke Ecke des Begrenzungsrahmens auf dem Eckpunkt des Dreiecks, f\u00fcr das der Winkel angegeben ist.",
+                    "Die Fixierposition liegt auf dem Schwerpunkt des Dreiecks."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "seite1",
+                    "type": "float",
+                    "description": "L\u00e4nge der ersten, horizontalen Seite"
+                },
+                {
+                    "name": "seite2",
+                    "type": "float",
+                    "description": "L\u00e4nge der zweiten Seite"
+                },
+                {
+                    "name": "winkel",
+                    "type": "float",
+                    "description": "Winkel von der ersten zu der zweiten Seiten, in Grad"
+                },
+                {
+                    "name": "farbe",
+                    "type": "Farbe",
+                    "description": "Farbe des Dreiecks"
+                }
+            ],
+            "returnValue": {
+                "type": "Grafik",
+                "description": "eine Grafik mit dem gegebenen Dreieck"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "ellipse",
+            "description": {
+                "p": [
+                    "Erzeugt eine Ellipse mit der gegebenen Breite und H\u00f6he, gef\u00fcllt in der gegebenen Farbe.",
+                    "Wenn Breite und H\u00f6he gleich gross sind wird die Ellipse zum Kreis mit dem entsprechenden Durchmesser."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "breite",
+                    "type": "float",
+                    "description": "Breite der Ellipse"
+                },
+                {
+                    "name": "hoehe",
+                    "type": "float",
+                    "description": "H\u00f6he der Ellipse"
+                },
+                {
+                    "name": "farbe",
+                    "type": "Farbe",
+                    "description": "F\u00fcllfarbe der Ellipse"
+                }
+            ],
+            "returnValue": {
+                "type": "Grafik",
+                "description": "eine Grafik mit der gegebenen Ellipse"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "kreis_sektor",
+            "description": {
+                "p": [
+                    "Erzeugt einen Kreissektor mit dem gegebenen Radius, der den gegebenen Winkel umspannt, gef\u00fcllt in der gegebenen Farbe.",
+                    "Ein Kreissektor ist ein Teil eines Kreises begrenzt durch zwei Radien und einen Bogen. Wenn man den Kreis als Uhr betrachtet dann zeigt der erste Radius in Richtung 3 Uhr. Der Winkel bestimmt die Position des zweiten Radius, ausgehend vom ersten Radius im Gegenuhrzeigersinn. Ein Winkel von 360 Grad entspricht einem ganzen Kreis.",
+                    "Die Fixierposition liegt in der Mitte des Kreises, aus dem der Kreissektor ausgeschnitten wurde."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "radius",
+                    "type": "float",
+                    "description": "Kreisradius"
+                },
+                {
+                    "name": "winkel",
+                    "type": "float",
+                    "description": "Winkel des Sektors, in Grad"
+                },
+                {
+                    "name": "farbe",
+                    "type": "Farbe",
+                    "description": "F\u00fcllfarbe des Kreissektors"
+                }
+            ],
+            "returnValue": {
+                "type": "Grafik",
+                "description": "eine Grafik mit dem gegebenen Kreissektor"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "leere_grafik",
+            "description": {
+                "p": [
+                    "Erzeugt eine leere Grafik. Wenn eine leere Grafik mit einer anderen Grafik kombiniert wird verh\u00e4lt sie sich als neutrales Element: das Ergebnis der Komposition ist einfach gleich der anderen Grafik."
+                ]
+            },
+            "parameters": [],
+            "returnValue": {
+                "type": "Grafik",
+                "description": "eine leere Grafik (Breite und H\u00f6he sind 0)"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "rechteck",
+            "description": {
+                "p": [
+                    "Erzeugt ein Rechteck mit der gegebenen Breite und H\u00f6he, gef\u00fcllt in der gegebenen Farbe."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "breite",
+                    "type": "float",
+                    "description": "die Breite des Rechtecks"
+                },
+                {
+                    "name": "hoehe",
+                    "type": "float",
+                    "description": "die H\u00f6he des Rechtecks"
+                },
+                {
+                    "name": "farbe",
+                    "type": "Farbe",
+                    "description": "F\u00fcllfarbe des Rechtecks"
+                }
+            ],
+            "returnValue": {
+                "type": "Grafik",
+                "description": "eine Grafik mit dem gegebenen Rechteck"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "text",
+            "description": {
+                "p": [
+                    "Erzeugt einen Text in der gegebenen Schriftart und Schriftgr\u00f6sse, gef\u00fcllt in der gegebenen Farbe.",
+                    "Falls f\u00fcr die gegebene Schriftart auf dem System keine True-Type Schrift zur Verf\u00fcgung steht, wird eine einfache Standardschriftart verwendet. Die resultierende Grafik hat die minimale Gr\u00f6sse, die den gesamten Text umschliesst.",
+                    "Die Fixierposition liegt auf der linken Kante des Begrenzungsrahmens, auf der H\u00f6he der Grundlinie des Textes."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "inhalt",
+                    "type": "str",
+                    "description": "der Text, der dargestellt werden soll"
+                },
+                {
+                    "name": "schriftart",
+                    "type": "str",
+                    "description": "der Name der Schriftart (zum Beispiel \u201cArial\u201d oder \u201cFira Sans\u201d)"
+                },
+                {
+                    "name": "punkte",
+                    "type": "float",
+                    "description": "Schriftgr\u00f6sse in typografischen Punkten (zum Beispiel 16)"
+                },
+                {
+                    "name": "farbe",
+                    "type": "Farbe",
+                    "description": "Farbe, in der der Text dargestellt werden soll"
+                }
+            ],
+            "returnValue": {
+                "type": "Grafik",
+                "description": "eine Grafik bestehend aus dem gegebenen Text"
+            }
+        },
+        {
+            "kind": "type",
+            "name": "Punkt",
+            "type": null,
+            "description": {
+                "p": [
+                    "Repr\u00e4sentiert einen Punkt in der Ebene."
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "mitte",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Der Mittelpunkt des Begrenzungsrahmens"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "mitte_links",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Der Mittelpunkt der linken Kante des Begrenzungsrahmens"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "mitte_rechts",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Der Mittelpunkt der rechten Kante des Begrenzungsrahmens"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "oben_links",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Die obere linke Ecke des Begrenzungsrahmens"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "oben_mitte",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Der Mittelpunkt der oberen Kante des Begrenzungsrahmens"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "oben_rechts",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Die obere rechte Ecke des Begrenzungsrahmens"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "unten_links",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Die untere linke Ecke des Begrenzungsrahmens"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "unten_mitte",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Der Mittelpunkt der unteren Kante des Begrenzungsrahmens"
+                ]
+            }
+        },
+        {
+            "kind": "constant",
+            "name": "unten_rechts",
+            "type": "Point",
+            "description": {
+                "p": [
+                    "Die untere rechte Ecke des Begrenzungsrahmens"
+                ]
+            }
+        },
+        {
+            "kind": "function",
+            "name": "drehe",
+            "description": {
+                "p": [
+                    "Erzeugt eine neue Grafik, die einer Rotation der gegebenen Grafik um ihre Fixierposition im Gegenuhrzeigersinn um den gegebenen Winkel entspricht. Negative Winkel entsprechen einer Rotation um Uhrzeigersinn."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "winkel",
+                    "type": "float",
+                    "description": "Drehwinkel, in Grad im Gegenuhrzeigersinn"
+                },
+                {
+                    "name": "grafik",
+                    "type": "Grafik",
+                    "description": "zu rotierende Grafik"
+                }
+            ],
+            "returnValue": {
+                "type": "Grafik",
+                "description": "die neue, rotierte Grafik"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "fixiere",
+            "description": {
+                "p": [
+                    "Erzeugt eine neue Grafik, die der gegebenen Grafik mit einer neuen Fixierposition entspricht.",
+                    "Jede Grafik liegt in einem rechteckigen Begrenzungsrahmen. Der Rahmen definiert 9 nennenswerte Punkte: die vier Ecken, die Mittelpunkte der vier Kanten und die Mitte des Rahmens. Die Namen dieser Punkte sind: oben_links, oben_mitte, oben_rechts, mitte_links, mitte, mitte_rechts, unten_links, unten_mitte und unten_rechts."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "punkt",
+                    "type": "Point",
+                    "description": "ein Punkt welcher die neue Fixierposition bestimmt"
+                },
+                {
+                    "name": "grafik",
+                    "type": "Grafik",
+                    "description": null
+                }
+            ],
+            "returnValue": {
+                "type": "Grafik",
+                "description": "eine neue Grafik mit der gegebenen Fixierposition"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "grafik_breite",
+            "description": {
+                "p": [
+                    "Gibt die Breite der gegebenen Grafik zur\u00fcck."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "grafik",
+                    "type": "Grafik",
+                    "description": "Grafik deren Breite gesucht ist"
+                }
+            ],
+            "returnValue": {
+                "type": "int",
+                "description": "Breite der Grafik"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "grafik_hoehe",
+            "description": {
+                "p": [
+                    "Gibt die H\u00f6he der gegebenen Grafik zur\u00fcck."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "grafik",
+                    "type": "Grafik",
+                    "description": "Grafik deren H\u00f6he gesucht ist"
+                }
+            ],
+            "returnValue": {
+                "type": "int",
+                "description": "H\u00f6he der Grafik"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "kombiniere",
+            "description": {
+                "p": [
+                    "Erzeugt eine neue Grafik, die aus der Kombination der zwei gegebenen Grafiken besteht. Die erste gegebene Grafik liegt im Vordergrund und die zweite im Hintergrund. Die Grafiken werden so ausgerichtet, dass ihre Fixierpositionen \u00fcbereinanderliegen.",
+                    "Die \u00fcberlappenden Fixierpositionen werden zur Fixierposition der resultierenden Grafik."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "vordere_grafik",
+                    "type": "Grafik",
+                    "description": "Grafik im Vordergrund"
+                },
+                {
+                    "name": "hintere_grafik",
+                    "type": "Grafik",
+                    "description": "Grafik im Hintergrund"
+                }
+            ],
+            "returnValue": {
+                "type": "Grafik",
+                "description": "die zusammengesetzte Grafik"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "neben",
+            "description": {
+                "p": [
+                    "Erzeugt eine neue Grafik, die aus dem Nebeneinanderlegen der zwei gegebenen Grafiken besteht. Die zwei Grafiken sind vertikal zentriert.",
+                    "Die Fixierposition der neuen Grafik liegt in deren Mitte."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "linke_grafik",
+                    "type": "Grafik",
+                    "description": "linke Grafik (im Westen)"
+                },
+                {
+                    "name": "rechte_grafik",
+                    "type": "Grafik",
+                    "description": "rechte Grafik (im Osten)"
+                }
+            ],
+            "returnValue": {
+                "type": "Grafik",
+                "description": "die zusammengesetzte Grafik"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "ueber",
+            "description": {
+                "p": [
+                    "Erzeugt eine neue Grafik, die aus dem \u00dcbereinanderlegen der zwei gegebenen Grafiken besteht. Die zwei Grafiken sind horizontal zentriert.",
+                    "Die Fixierposition der neuen Grafik liegt in deren Mitte."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "obere_grafik",
+                    "type": "Grafik",
+                    "description": "obere Grafik (im Norden)"
+                },
+                {
+                    "name": "untere_grafik",
+                    "type": "Grafik",
+                    "description": "untere Grafik (im S\u00fcden)"
+                }
+            ],
+            "returnValue": {
+                "type": "Grafik",
+                "description": "die zusammengesetzte Grafik"
+            }
+        },
+        {
+            "kind": "function",
+            "name": "ueberlagere",
+            "description": {
+                "p": [
+                    "Erzeugt eine neue Grafik, die aus der zentrierten \u00dcberlagerung der zwei gegebenen Grafiken besteht. Die erste gegebene Grafik liegt im Vordergrund und die zweite im Hintergrund.",
+                    "Die Fixierposition der neuen Grafik liegt in deren Mitte."
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "vordere_grafik",
+                    "type": "Grafik",
+                    "description": "Grafik im Vordergrund"
+                },
+                {
+                    "name": "hintere_grafik",
+                    "type": "Grafik",
+                    "description": "Grafik im Hintergrund"
+                }
+            ],
+            "returnValue": {
+                "type": "Grafik",
+                "description": "die zusammengesetzte Grafik"
+            }
+        }
+    ]
+}
