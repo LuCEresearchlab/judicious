@@ -6,6 +6,7 @@ import {
 } from 'react';
 import { ExecutionResponse } from '../src/codeExecution';
 import { addMarkers } from '../src/pythonTraceback';
+import { registerCustomPythonLanguage, STRICT_PYTHON3_LANG_ID } from '../src/strictPython3';
 import theme from '../src/theme';
 
 // Load the same version of monaco-editor specified in the package.json from a
@@ -28,7 +29,6 @@ const customTheme = {
   },
 };
 
-const LANGUAGE = 'python';
 const RUN_CODE_CONDITION_KEY = 'executionAllowedCondition';
 export const COLORIZE_CLASSNAME = 'monaco-colorize';
 
@@ -58,6 +58,8 @@ export default function CodeEditor({
   ) => {
     monacoRef.current = monaco;
     editorRef.current = editor;
+
+    registerCustomPythonLanguage(monaco);
 
     monaco.editor.defineTheme(themeName, customTheme);
     monaco.editor.setTheme(themeName);
@@ -173,7 +175,7 @@ export default function CodeEditor({
   return (
     <div ref={containerRef}>
       <Editor
-        language={LANGUAGE}
+        language={STRICT_PYTHON3_LANG_ID}
         theme={themeName}
         defaultValue={currentSource}
         onMount={handleEditorMount}
