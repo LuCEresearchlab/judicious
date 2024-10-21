@@ -112,7 +112,7 @@
                 {
                     "name": "flush",
                     "type": "bool",
-                    "description": "whether to force flusing the stream",
+                    "description": "whether to force flushing the stream",
                     "default": "False"
                 }
             ],

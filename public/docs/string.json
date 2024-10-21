@@ -5,7 +5,7 @@
         {
             "kind": "constant",
             "name": "ascii_lowercase",
-            "type": "string",
+            "type": "str",
             "description": {
                 "p": ["Sequence of lowercase letters 'abcdefghijklmnopqrstuvwxyz'."]
             }
@@ -13,7 +13,7 @@
         {
             "kind": "constant",
             "name": "ascii_uppercase",
-            "type": "string",
+            "type": "str",
             "description": {
                 "p": ["Sequence of uppercase letters 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'."]
             }
@@ -21,7 +21,7 @@
         {
             "kind": "constant",
             "name": "ascii_letters",
-            "type": "string",
+            "type": "str",
             "description": {
                 "p": ["Concatenation of the `ascii_lowercas` and `ascii_uppercase` constants."]
             }
@@ -29,7 +29,7 @@
         {
             "kind": "constant",
             "name": "digits",
-            "type": "string",
+            "type": "str",
             "description": {
                 "p": ["Sequence of decimal digits '0123456789'."]
             }
@@ -37,7 +37,7 @@
         {
             "kind": "constant",
             "name": "hexdigits",
-            "type": "string",
+            "type": "str",
             "description": {
                 "p": ["Sequence of hexadecimal digits '0123456789abcdefABCDEF'."]
             }
@@ -45,7 +45,7 @@
         {
             "kind": "constant",
             "name": "octdigits",
-            "type": "string",
+            "type": "str",
             "description": {
                 "p": ["Sequence of octal digits '01234567'."]
             }
@@ -53,7 +53,7 @@
         {
             "kind": "constant",
             "name": "punctuation",
-            "type": "string",
+            "type": "str",
             "description": {
                 "p": ["Sequence of ASCII characters which are considered punctuation: `!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~`"]
             }
@@ -61,7 +61,7 @@
         {
             "kind": "constant",
             "name": "printable",
-            "type": "string",
+            "type": "str",
             "description": {
                 "p": ["Sequence of ASCII characters which are considered printable: `digits`, `ascii_letters`, `punctuation`, and `whitespace`."]
             }
@@ -69,7 +69,7 @@
         {
             "kind": "constant",
             "name": "whitespace",
-            "type": "string",
+            "type": "str",
             "description": {
                 "p": ["Sequence of ASCII characters which are considered whitespace: space, tab, linefeed, return, formfeed, and vertical tab."]
             }
