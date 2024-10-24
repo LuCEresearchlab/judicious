@@ -16,7 +16,11 @@ export default function PageFooter() {
       <Typography variant="body1" align="center" fontSize="1.2rem">
         <strong>Judicious</strong>
         {' '}
-        is a project created by
+        is an
+        {' '}
+        <Link href="https://github.com/LuCEresearchlab/judicious">open-source project</Link>
+        {' '}
+        created by
         the&nbsp;
         <Link href="https://luce.si.usi.ch/">Lugano Computing Education Research Lab</Link>
         &nbsp;at the&nbsp;
