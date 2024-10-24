@@ -12,7 +12,7 @@ import {
   JudiciousType,
 } from '../../src/schemas/documentation';
 import CodeElement from './CodeElement';
-import ConfigButtons, { SHOW_TYPES_KEY } from './ConfigButtons';
+import ConfigButtons, { SHOW_DIAGRAM_KEY, SHOW_TYPES_KEY } from './ConfigButtons';
 import ConstantDiagram from './ConstantDiagram';
 import { hoverProps, moduleId, nameId } from './utils';
 
@@ -39,7 +39,7 @@ export default function TypeConstantDocumentation({ element, module }
               {module === '.' ? t('fromYourCode') : t('fromLibrary', { module })}
             </Typography>
           </span>
-          <ConfigButtons available={element.kind === 'constant' ? [SHOW_TYPES_KEY] : []} />
+          <ConfigButtons available={element.kind === 'constant' ? [SHOW_TYPES_KEY, SHOW_DIAGRAM_KEY] : []} />
         </Box>
         <Typography>
           <span {...hoverProps(nameId(), hoverElement, setHoverElement)}>
@@ -54,7 +54,7 @@ export default function TypeConstantDocumentation({ element, module }
           )}
         </Typography>
       </Box>
-      { element.kind === 'constant' && (
+      { element.kind === 'constant' && docsMetadata.showDiagram && (
         <ConstantDiagram
           constant={element}
           module={module}
